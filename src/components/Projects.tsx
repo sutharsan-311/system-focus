@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Accordion } from "@/components/ui/accordion";
 import { ProjectCard } from "./ProjectCard";
 
 const projects = [
@@ -101,11 +102,15 @@ export function Projects() {
             Projects
           </h2>
           
-          <div className="space-y-4">
-            {projects.map((project) => (
-              <ProjectCard key={project.title} project={project} />
+          <Accordion type="single" collapsible className="space-y-4">
+            {projects.map((project, index) => (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                value={`project-${index}`}
+              />
             ))}
-          </div>
+          </Accordion>
         </motion.div>
       </div>
     </section>
