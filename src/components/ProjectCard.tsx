@@ -34,21 +34,23 @@ export function ProjectCard({ project, value, featured = false }: ProjectCardPro
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative rounded-lg">
+      {/* Glow layer - must be direct child of relative parent */}
       {featured && (
         <GlowingEffect
           spread={40}
           glow={true}
           disabled={isTouchDevice}
           proximity={64}
-          inactiveZone={0.01}
+          inactiveZone={0.15}
           borderWidth={2}
-          className="rounded-lg"
         />
       )}
+
+      {/* Card content - must have relative z-10 and same border radius */}
       <AccordionItem
         value={value}
-        className="border border-border rounded-lg bg-card overflow-hidden data-[state=open]:bg-card"
+        className="relative z-10 border border-border rounded-lg bg-background overflow-hidden data-[state=open]:bg-background"
       >
         <AccordionTrigger className="w-full px-6 py-6 text-left hover:bg-secondary/50 transition-colors duration-150 hover:no-underline">
           <div className="flex-1 min-w-0 text-left">
