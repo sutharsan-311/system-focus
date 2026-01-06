@@ -108,6 +108,7 @@ export function Projects() {
                 key={project.title}
                 project={project}
                 value={`project-${index}`}
+                featured={index === 0}
               />
             ))}
           </Accordion>
