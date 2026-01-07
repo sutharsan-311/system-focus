@@ -76,11 +76,22 @@ export default {
           "0%": { transform: "translateX(0)", opacity: "1" },
           "100%": { transform: "translateX(100%)", opacity: "0" },
         },
+        spotlight: {
+          "0%": {
+            opacity: "0",
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translate(-50%,-40%) scale(1)",
+          },
+        },
       },
       animation: {
         "fade-in": "fade-in 0.15s ease-out forwards",
         "slide-in-right": "slide-in-right 0.15s ease-out forwards",
         "slide-out-right": "slide-out-right 0.15s ease-out forwards",
+        spotlight: "spotlight 2s ease .75s 1 forwards",
       },
     },
   },
