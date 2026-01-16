@@ -15,6 +15,9 @@ const skillCategories = [
       "Occupancy Grid Mapping",
       "Gmapping",
       "Sensor Integration (LiDAR, RGB-D)",
+      "MoveIt",
+      "ROS Bag",
+      "Launch Files",
     ],
   },
   {
@@ -23,6 +26,24 @@ const skillCategories = [
       "OpenCV",
       "YOLO",
       "Point Cloud Processing (PointCloud2)",
+      "Image Segmentation",
+      "Object Detection",
+      "Computer Vision",
+      "RGB-D Fusion",
+      "LiDAR Processing",
+    ],
+  },
+  {
+    title: "Navigation & Planning",
+    skills: [
+      "SBPL Planner",
+      "DWB Planner",
+      "Costmap Optimization",
+      "Path Planning",
+      "Localization",
+      "SLAM",
+      "AMCL",
+      "Map Management",
     ],
   },
   {
@@ -30,16 +51,33 @@ const skillCategories = [
     skills: [
       "Python",
       "C++",
+      "Bash Scripting",
+      "CMake",
+      "Package Management",
     ],
   },
   {
-    title: "Tools",
+    title: "Tools & Platforms",
     skills: [
       "Ubuntu Linux",
       "Gazebo",
       "RViz / RViz2",
       "Git",
       "GitHub",
+      "Docker",
+      "VS Code",
+      "Terminal",
+    ],
+  },
+  {
+    title: "Hardware & Systems",
+    skills: [
+      "Actuator Control",
+      "Sensor Integration",
+      "Real-time Systems",
+      "Embedded Systems",
+      "System Debugging",
+      "Performance Optimization",
     ],
   },
 ];
@@ -54,9 +92,6 @@ export function Skills() {
           viewport={{ once: true }}
           transition={{ duration: 0.15 }}
         >
-          <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
-            // SKILLS
-          </p>
           <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
             Technical Stack
           </h2>
@@ -64,7 +99,7 @@ export function Skills() {
             A comprehensive toolkit for building intelligent robotic systems
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skillCategories.map((category, index) => (
               <div key={index} className="space-y-4">
                 <h3 className="text-lg font-semibold text-foreground">

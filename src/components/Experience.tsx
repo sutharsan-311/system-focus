@@ -40,9 +40,6 @@ export function Experience() {
           transition={{ duration: 0.15 }}
           className="max-w-3xl"
         >
-          <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
-            // EXPERIENCE
-          </p>
           <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-12">
             Work Experience
           </h2>

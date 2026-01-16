@@ -65,10 +65,6 @@ export function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.15 }}
         >
-          <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
-            // ABOUT ME
-          </p>
-                    
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             <div className="lg:col-span-2 space-y-6">
               <p className="text-lg text-foreground leading-relaxed">
