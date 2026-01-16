@@ -9,15 +9,9 @@ const skillCategories = [
       "nav2",
       "ros2_control",
       "tf2",
-      "Topics",
-      "Services",
-      "Actions",
-      "Occupancy Grid Mapping",
-      "Gmapping",
-      "Sensor Integration (LiDAR, RGB-D)",
       "MoveIt",
-      "ROS Bag",
-      "Launch Files",
+      "Gmapping",
+      "SLAM",
     ],
   },
   {
@@ -25,25 +19,21 @@ const skillCategories = [
     skills: [
       "OpenCV",
       "YOLO",
-      "Point Cloud Processing (PointCloud2)",
+      "PointCloud2",
       "Image Segmentation",
       "Object Detection",
-      "Computer Vision",
       "RGB-D Fusion",
-      "LiDAR Processing",
     ],
   },
   {
-    title: "Navigation & Planning",
+    title: "Navigation",
     skills: [
       "SBPL Planner",
       "DWB Planner",
-      "Costmap Optimization",
       "Path Planning",
       "Localization",
-      "SLAM",
       "AMCL",
-      "Map Management",
+      "Costmap Tuning",
     ],
   },
   {
@@ -51,31 +41,25 @@ const skillCategories = [
     skills: [
       "Python",
       "C++",
-      "Bash Scripting",
+      "Bash",
       "CMake",
-      "Package Management",
     ],
   },
   {
-    title: "Tools & Platforms",
+    title: "Tools",
     skills: [
-      "Ubuntu Linux",
+      "Ubuntu",
       "Gazebo",
-      "RViz / RViz2",
+      "RViz2",
       "Git",
-      "GitHub",
       "Docker",
-      "VS Code",
-      "Terminal",
     ],
   },
   {
-    title: "Hardware & Systems",
+    title: "Systems",
     skills: [
-      "Actuator Control",
-      "Sensor Integration",
+      "Hardware Integration",
       "Real-time Systems",
-      "Embedded Systems",
       "System Debugging",
       "Performance Optimization",
     ],
@@ -99,17 +83,17 @@ export function Skills() {
             A comprehensive toolkit for building intelligent robotic systems
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {skillCategories.map((category, index) => (
-              <div key={index} className="space-y-4">
-                <h3 className="text-lg font-semibold text-foreground">
+              <div key={index} className="space-y-3">
+                <h3 className="text-base font-semibold text-foreground">
                   {category.title}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="text-sm text-muted-foreground font-mono px-3 py-1.5 bg-secondary rounded border border-border hover:border-primary/50 transition-colors"
+                      className="text-xs text-muted-foreground font-mono px-2.5 py-1 bg-secondary rounded border border-border hover:border-primary/50 transition-colors"
                     >
                       {skill}
                     </span>
