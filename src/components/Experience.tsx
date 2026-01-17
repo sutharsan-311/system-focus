@@ -4,7 +4,7 @@ const experiences = [
   {
     title: "Junior ROS Developer",
     company: "Spotless AI",
-    period: "Mar 2024 – Present",
+    period: "Mar 2025 – Present",
     bullets: [
       "Developing and maintaining **ROS2-based autonomous mobile robots** for real-world deployment",
       "Implemented autonomous navigation using **nav2**, integrating **SBPL (global planner)** and **DWB (local planner)**",
@@ -21,7 +21,7 @@ const experiences = [
   {
     title: "ROS Trainee",
     company: "Logical Minds IT Services",
-    period: "Jan 2024 – Mar 2024",
+    period: "Dec 2024 – Mar 2025",
     bullets: [
       "Trained in **ROS/ROS2 fundamentals**, perception, mapping, navigation, and simulation",
       "Contributed to live robotics projects in collaboration with **Spotless AI**, leading to a full-time transition",
