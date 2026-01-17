@@ -100,24 +100,9 @@ export function Hero() {
                   </AnimatePresence>
                 </div>
                 
-                <p className="mt-4 text-lg md:text-xl text-neutral-300 max-w-2xl mb-6">
+                <p className="mt-4 text-lg md:text-xl text-neutral-300 max-w-2xl mb-8">
                   I build and deploy real world autonomous robots using <strong>ROS2, nav2, and ros2_control</strong> working hands on with perception, mapping, navigation, and robot hardware.
                 </p>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.2 }}
-                  className="mb-8"
-                >
-                  <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-300 bg-neutral-900/50 border border-neutral-800 rounded-full">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                    </span>
-                    Available for Projects
-                  </span>
-                </motion.div>
 
                 <div className="flex flex-wrap gap-2 mb-12">
                   {capabilities.map((cap) => (

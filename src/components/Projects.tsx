@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Accordion } from "@/components/ui/accordion";
 import { ProjectCard } from "./ProjectCard";
-import { Badge } from "@/components/ui/badge";
 
 const projects = [
   {
@@ -72,28 +71,9 @@ export function Projects() {
           <h2 id="projects-heading" className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
             Featured Work
           </h2>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
-            <p className="text-muted-foreground max-w-2xl">
-              A selection of robotics projects showcasing autonomous systems, perception, and intelligent solutions
-            </p>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-            >
-              <Badge 
-                variant="outline" 
-                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium border-primary/50 bg-primary/5 hover:bg-primary/10 transition-colors"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                </span>
-                Available for Projects
-              </Badge>
-            </motion.div>
-          </div>
+          <p className="text-muted-foreground mb-12 max-w-2xl">
+            A selection of robotics projects showcasing autonomous systems, perception, and intelligent solutions
+          </p>
           
           <Accordion type="single" collapsible className="space-y-4 md:space-y-6">
             {projects.map((project, index) => (
