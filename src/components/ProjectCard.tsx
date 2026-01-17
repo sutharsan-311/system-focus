@@ -6,6 +6,8 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { ImageModal } from "./ImageModal";
+import { ExternalLink, Image as ImageIcon } from "lucide-react";
 
 interface Project {
   title: string;
@@ -14,6 +16,9 @@ interface Project {
   constraints: string[];
   stack: string[];
   outcome: string;
+  imageUrl?: string;
+  demoUrl?: string;
+  githubUrl?: string;
 }
 
 interface ProjectCardProps {
@@ -22,8 +27,17 @@ interface ProjectCardProps {
   featured?: boolean;
 }
 
+/**
+ * ProjectCard component displays a project with expandable details.
+ * Supports image gallery, demo links, and GitHub links.
+ * 
+ * @param project - Project data including title, summary, details, etc.
+ * @param value - Unique value for accordion item
+ * @param featured - Whether this is a featured project
+ */
 export function ProjectCard({ project, value, featured = false }: ProjectCardProps) {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   useEffect(() => {
     // Detect touch device - disable glow on mobile/touch for performance
@@ -117,10 +131,64 @@ export function ProjectCard({ project, value, featured = false }: ProjectCardPro
                   {project.outcome}
                 </p>
               </div>
+
+              {(project.imageUrl || project.demoUrl || project.githubUrl) && (
+                <div>
+                  <h4 className="text-sm font-mono text-muted-foreground uppercase tracking-wider mb-3">
+                    Links & Media
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {project.imageUrl && (
+                      <button
+                        onClick={() => setIsImageModalOpen(true)}
+                        className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-foreground bg-secondary border border-border rounded hover:border-primary/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                        aria-label={`View image for ${project.title}`}
+                      >
+                        <ImageIcon className="h-3 w-3" />
+                        View Image
+                      </button>
+                    )}
+                    {project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-foreground bg-secondary border border-border rounded hover:border-primary/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                        aria-label={`View live demo of ${project.title}`}
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                        Live Demo
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-foreground bg-secondary border border-border rounded hover:border-primary/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                        aria-label={`View GitHub repository for ${project.title}`}
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                        GitHub
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </AccordionContent>
         </AccordionItem>
       </div>
+      
+      {project.imageUrl && (
+        <ImageModal
+          isOpen={isImageModalOpen}
+          onClose={() => setIsImageModalOpen(false)}
+          imageUrl={project.imageUrl}
+          alt={`${project.title} project image`}
+          title={project.title}
+        />
+      )}
     </div>
   );
 }

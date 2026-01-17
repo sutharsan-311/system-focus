@@ -28,6 +28,10 @@ const stats = [
   },
 ];
 
+/**
+ * Stats component - Displays key statistics and achievements.
+ * Shows metrics like years of experience, projects completed, and achievements with animated icons.
+ */
 export function Stats() {
   return (
     <section className="py-12 border-t border-border bg-black">

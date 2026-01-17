@@ -55,6 +55,10 @@ function GlowingCard({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * About component - Displays information about the developer's expertise and capabilities.
+ * Features animated cards with icons showcasing key skills in robotics, perception, and navigation.
+ */
 export function About() {
   return (
     <section id="about" className="py-24 border-t border-border" aria-labelledby="about-heading">

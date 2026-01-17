@@ -29,6 +29,10 @@ const experiences = [
   },
 ];
 
+/**
+ * Experience component displays work experience in an animated timeline format.
+ * Features a vertical timeline with animated entries on scroll.
+ */
 export function Experience() {
   return (
     <section id="experience" className="py-24 border-t border-border" aria-labelledby="experience-heading">
@@ -46,8 +50,21 @@ export function Experience() {
           
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <div key={index} className="relative pl-8 border-l-2 border-border">
-                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-2 border-background" />
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                className="relative pl-8 border-l-2 border-border"
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: index * 0.1 + 0.1 }}
+                  className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-2 border-background"
+                />
                 <div className="space-y-3">
                   <div>
                     <h3 className="text-xl font-semibold text-foreground">
@@ -63,14 +80,21 @@ export function Experience() {
                   
                   <ul className="space-y-2">
                     {exp.bullets.map((bullet, bulletIndex) => (
-                      <li key={bulletIndex} className="text-foreground leading-relaxed text-sm">
+                      <motion.li
+                        key={bulletIndex}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.2, delay: index * 0.1 + bulletIndex * 0.05 }}
+                        className="text-foreground leading-relaxed text-sm"
+                      >
                         <span className="text-muted-foreground">• </span>
                         <span dangerouslySetInnerHTML={{ __html: bullet.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>

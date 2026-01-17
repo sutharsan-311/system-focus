@@ -54,6 +54,10 @@ const projects = [
   },
 ];
 
+/**
+ * Projects component - Displays featured robotics projects in an accordion layout.
+ * Each project can be expanded to show implementation details, constraints, tech stack, and outcomes.
+ */
 export function Projects() {
   return (
     <section id="projects" className="py-24 border-t border-border" aria-labelledby="projects-heading">

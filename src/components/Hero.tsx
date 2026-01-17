@@ -20,6 +20,10 @@ const rotatingTitles = [
   "Robotics Software Engineer",
 ];
 
+/**
+ * Hero component - The main landing section with 3D robot model, rotating titles, and call-to-action buttons.
+ * Features a Spline 3D scene, animated text, and smooth scroll navigation.
+ */
 export function Hero() {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
 

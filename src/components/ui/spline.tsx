@@ -70,6 +70,13 @@ function SplineWrapper({ scene, className }: SplineSceneProps) {
   )
 }
 
+/**
+ * SplineScene component - Wrapper for Spline 3D scenes with loading states and error handling.
+ * Implements lazy loading, loading spinners, and graceful error fallbacks.
+ * 
+ * @param scene - URL to the Spline scene file
+ * @param className - Optional CSS classes for styling
+ */
 export function SplineScene({ scene, className }: SplineSceneProps) {
   return (
     <Suspense fallback={<LoadingSpinner />}>

@@ -22,6 +22,10 @@ const navItems: NavItem[] = [
   { name: "Contact", url: "#contact", icon: Mail },
 ];
 
+/**
+ * Header component - Fixed navigation header with desktop and mobile menu support.
+ * Features active section highlighting, smooth scroll with offset, and responsive hamburger menu.
+ */
 export function Header() {
   const [activeTab, setActiveTab] = useState("Home");
   const [isMobile, setIsMobile] = useState(false);

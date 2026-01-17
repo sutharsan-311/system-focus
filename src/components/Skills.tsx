@@ -66,6 +66,10 @@ const skillCategories = [
   },
 ];
 
+/**
+ * Skills component - Displays technical stack organized by categories.
+ * Shows skills in a grid layout with hover effects and organized by domain (Robotics, Perception, Navigation, etc.).
+ */
 export function Skills() {
   return (
     <section id="skills" className="py-24 border-t border-border" aria-labelledby="skills-heading">

@@ -27,6 +27,10 @@ const quickLinks = [
   { name: "Contact", href: "#contact" },
 ];
 
+/**
+ * Footer component - Site footer with brand info, quick navigation links, and social media links.
+ * Features smooth scroll navigation and animated social icons.
+ */
 export function Footer() {
   const currentYear = new Date().getFullYear();
 

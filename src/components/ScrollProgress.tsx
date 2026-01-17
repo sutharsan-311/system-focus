@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
+/**
+ * ScrollProgress component - Visual progress indicator at the top of the page.
+ * Shows how far the user has scrolled through the page with an animated progress bar.
+ */
 export function ScrollProgress() {
   const [scrollProgress, setScrollProgress] = useState(0);
 

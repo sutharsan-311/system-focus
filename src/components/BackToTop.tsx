@@ -3,6 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/**
+ * BackToTop component - Floating button that appears when user scrolls down.
+ * Provides quick navigation back to the top of the page with smooth scroll animation.
+ */
 export function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
 

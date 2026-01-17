@@ -62,18 +62,50 @@ function GlowingCard({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * Contact component - Contact form and social links section.
+ * Features a contact form that can be integrated with EmailJS and displays social media links.
+ * 
+ * To enable EmailJS integration:
+ * 1. Install: npm install @emailjs/browser
+ * 2. Configure environment variables (VITE_EMAILJS_SERVICE_ID, etc.)
+ * 3. Update handleSubmit to use sendEmail from @/lib/emailjs
+ */
 export function Contact() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
     const form = e.currentTarget;
     const formData = new FormData(form);
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const message = formData.get("message") as string;
-    
-    const subject = encodeURIComponent(`Portfolio Contact: ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-    window.location.href = `mailto:sutharsanmail311@gmail.com?subject=${subject}&body=${body}`;
+
+    try {
+      // Import and use EmailJS when configured
+      // const { sendEmail } = await import('@/lib/emailjs');
+      // const result = await sendEmail({ name, email, message });
+      
+      // For now, use mailto fallback
+      const subject = encodeURIComponent(`Portfolio Contact: ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+      window.location.href = `mailto:sutharsanmail311@gmail.com?subject=${subject}&body=${body}`;
+      
+      setSubmitStatus({ type: 'success', message: 'Opening email client...' });
+      form.reset();
+    } catch (error) {
+      setSubmitStatus({ 
+        type: 'error', 
+        message: error instanceof Error ? error.message : 'Failed to send message. Please try again.' 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -185,10 +217,16 @@ export function Contact() {
                       variant="variant" 
                       className="w-full min-w-0"
                       aria-label="Submit contact form"
+                      disabled={isSubmitting}
                     >
                       <Send className="w-4 h-4 mr-2" />
-                      Send Message
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
                     </GradientButton>
+                    {submitStatus.type && (
+                      <p className={`text-xs text-center ${submitStatus.type === 'success' ? 'text-green-500' : 'text-red-500'}`}>
+                        {submitStatus.message}
+                      </p>
+                    )}
                     <p className="text-xs text-muted-foreground text-center">
                       By submitting, you agree to a friendly conversation about robotics 
                     </p>

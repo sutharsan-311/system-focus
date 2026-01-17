@@ -12,6 +12,12 @@ interface State {
   error: Error | null;
 }
 
+/**
+ * ErrorBoundary component - Catches JavaScript errors anywhere in the child component tree.
+ * Displays a fallback UI instead of crashing the entire app.
+ * 
+ * Can be extended to log errors to services like Sentry.
+ */
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
