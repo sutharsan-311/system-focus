@@ -19,7 +19,7 @@ const projects = [
     ],
     stack: ["ROS", "Python", "OpenCV", "Embedded Systems"],
     outcome: "Finalist in E-Yantra Robotics Competition 2022-2023.",
-    imageUrl: "/system-focus/project-krishi-bot.jpg", // Add your project image to public folder
+    imageUrl: "/project-krishi-bot.jpg", // Add your project image to public folder
     githubUrl: "https://github.com/sutharsan-311/krishi-bot", // Update with your actual GitHub repo
   },
   {
@@ -37,7 +37,7 @@ const projects = [
     ],
     stack: ["Python", "OpenCV", "Image Segmentation", "Drone Systems"],
     outcome: "Functional prototype demonstrating vision-guided emergency response capabilities.",
-    imageUrl: "/system-focus/project-medical-drone.jpg", // Add your project image to public folder
+    imageUrl: "/project-medical-drone.jpg", // Add your project image to public folder
     githubUrl: "https://github.com/sutharsan-311/medical-drone", // Update with your actual GitHub repo
   },
   {
@@ -55,7 +55,7 @@ const projects = [
     ],
     stack: ["Python", "OpenCV", "Image Segmentation", "Computer Vision"],
     outcome: "Short-listed for Level 2 in Flipkart GRID 2.0 competition.",
-    imageUrl: "/system-focus/project-flipkart-grid.jpg", // Add your project image to public folder
+    imageUrl: "/project-flipkart-grid.jpg", // Add your project image to public folder
     githubUrl: "https://github.com/sutharsan-311/flipkart-grid", // Update with your actual GitHub repo
   },
 ];
@@ -95,8 +95,8 @@ export function Projects() {
               },
             }}
           >
-            <Accordion type="single" collapsible className="space-y-4 md:space-y-6">
-              {projects.map((project, index) => (
+          <Accordion type="single" collapsible className="space-y-4 md:space-y-6">
+            {projects.map((project, index) => (
                 <motion.div
                   key={project.title}
                   variants={{
@@ -105,14 +105,14 @@ export function Projects() {
                   }}
                   transition={{ duration: 0.4 }}
                 >
-                  <ProjectCard
-                    project={project}
-                    value={`project-${index}`}
-                    featured={true}
-                  />
+              <ProjectCard
+                project={project}
+                value={`project-${index}`}
+                featured={true}
+              />
                 </motion.div>
-              ))}
-            </Accordion>
+            ))}
+          </Accordion>
           </motion.div>
         </motion.div>
       </div>

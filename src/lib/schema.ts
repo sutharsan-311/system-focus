@@ -4,7 +4,7 @@ export const personSchema = {
   name: "Sutharsan",
   jobTitle: "Robotics Software Engineer",
   description: "I build reliable autonomous systems using ROS, perception pipelines, and AI-driven decision layers.",
-  url: "https://sutharsan-311.github.io/system-focus/",
+  url: "https://sutharsan.is-a.dev/",
   sameAs: [
     "https://github.com/sutharsan-311",
     "https://linkedin.com/in/sutharsan",
@@ -39,7 +39,7 @@ export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Sutharsan - Robotics Software Engineer Portfolio",
-  url: "https://sutharsan-311.github.io/system-focus/",
+  url: "https://sutharsan.is-a.dev/",
   description: "Portfolio website showcasing robotics projects, experience, and technical expertise in ROS, perception, and autonomous systems.",
   author: {
     "@type": "Person",

@@ -66,7 +66,7 @@ export function Hero() {
 
   const downloadResume = () => {
     const link = document.createElement("a");
-    link.href = "/system-focus/resume.pdf";
+    link.href = "/resume.pdf";
     link.download = "Sutharsan_Resume.pdf";
     document.body.appendChild(link);
     link.click();
