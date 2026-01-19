@@ -105,8 +105,8 @@ export function About() {
               
               <div className="bg-primary/5 border-l-4 border-primary p-4 rounded-r-lg">
                 <p className="text-foreground leading-relaxed italic">
-                  I care about systems that work reliably, not demos that look good once.
-                </p>
+                I care about systems that work reliably, not demos that look good once.
+              </p>
               </div>
               
               <div className="flex items-center gap-3 text-muted-foreground my-4" aria-hidden="true">

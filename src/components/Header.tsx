@@ -103,8 +103,8 @@ export function Header() {
         onClick={(e) => handleClick(e, item.url, item.name)}
         className={cn(
           "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
-          "text-foreground hover:bg-muted",
-          isActive && "bg-muted text-primary"
+          "text-foreground hover:bg-white/10",
+          isActive && "bg-white/10 text-white"
         )}
       >
         <Icon size={20} />
@@ -120,7 +120,7 @@ export function Header() {
         <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
           <SheetTrigger asChild>
             <button
-              className="p-2 rounded-lg bg-background/5 border border-border backdrop-blur-lg shadow-lg text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
+              className="p-2 rounded-lg bg-background/5 border border-border backdrop-blur-lg shadow-lg text-foreground hover:bg-white/10 focus:outline-none transition-colors"
               aria-label="Open navigation menu"
               aria-expanded={isMenuOpen}
             >
@@ -141,7 +141,7 @@ export function Header() {
                 href="/system-focus/resume.pdf"
                 download="Sutharsan_Resume.pdf"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-foreground hover:bg-muted mt-2"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-foreground hover:bg-white/10 mt-2"
               >
                 <Download size={20} />
                 <span className="font-medium">Resume</span>
@@ -167,8 +167,8 @@ export function Header() {
               aria-current={isActive ? "page" : undefined}
               className={cn(
                 "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
-                "text-foreground/80 hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-                isActive && "bg-muted text-white"
+                "text-foreground/80 hover:text-white focus:outline-none",
+                isActive && "bg-white/10 text-white"
               )}
             >
                 <span className="hidden md:inline">{item.name}</span>
@@ -202,7 +202,7 @@ export function Header() {
             aria-label="Download resume"
             className={cn(
               "relative cursor-pointer text-sm font-semibold px-4 py-2 rounded-full transition-colors",
-              "text-foreground/80 hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex items-center gap-2"
+              "text-foreground/80 hover:text-white focus:outline-none flex items-center gap-2"
             )}
           >
             <span className="hidden md:inline">Resume</span>

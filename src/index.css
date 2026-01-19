@@ -147,6 +147,13 @@
       animation: none;
     }
   }
+
+  /* Subtle neutral focus effect for inputs */
+  .glow-focus:focus-visible {
+    border-color: hsl(var(--border));
+    box-shadow: none;
+    outline: none;
+  }
 }
 
 @layer base {

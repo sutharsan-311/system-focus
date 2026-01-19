@@ -96,7 +96,7 @@ export function Contact() {
       } else if (result.fallback) {
         // Mailto fallback - show info message
         setSubmitStatus({ type: 'success', message: 'Email client opened. Please send the email manually. I\'ll receive it once you send it.' });
-        form.reset();
+      form.reset();
       } else {
         setSubmitStatus({ type: 'error', message: result.error || 'Failed to send message. Please try again.' });
       }
@@ -186,7 +186,7 @@ export function Contact() {
                         name="name"
                         placeholder="John Doe"
                         required
-                        className="bg-background"
+                        className="bg-background glow-focus focus-visible:ring-offset-0 focus-visible:ring-transparent"
                         aria-required="true"
                         aria-describedby="name-description"
                       />
@@ -202,7 +202,7 @@ export function Contact() {
                         type="email"
                         placeholder="john@example.com"
                         required
-                        className="bg-background"
+                        className="bg-background glow-focus focus-visible:ring-offset-0 focus-visible:ring-transparent"
                         aria-required="true"
                         aria-describedby="email-description"
                       />
@@ -218,7 +218,7 @@ export function Contact() {
                         placeholder="What would you like to discuss? Feel free to share your thoughts..."
                         required
                         rows={5}
-                        className="bg-background resize-none"
+                        className="bg-background resize-none glow-focus focus-visible:ring-offset-0 focus-visible:ring-transparent"
                         aria-required="true"
                         aria-describedby="message-description"
                       />

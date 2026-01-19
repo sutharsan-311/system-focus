@@ -15,7 +15,7 @@ function LoadingSkeleton() {
       <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900">
         {/* Animated gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-shimmer" />
-      </div>
+        </div>
       {/* Subtle pulsing effect */}
       <div className="absolute inset-0 bg-primary/5 animate-pulse" />
       {/* Loading indicator */}
