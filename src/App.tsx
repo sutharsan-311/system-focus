@@ -82,7 +82,7 @@ const App = () => {
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter basename="/system-focus">
+          <BrowserRouter>
             <Suspense fallback={<PageLoader />}>
               <AnimatedRoutes />
             </Suspense>
