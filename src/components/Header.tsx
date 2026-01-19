@@ -104,7 +104,7 @@ export function Header() {
         className={cn(
           "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
           "text-foreground hover:bg-muted",
-          isActive && "bg-muted text-primary"
+          isActive && "text-primary"
         )}
       >
         <Icon size={20} />
@@ -138,7 +138,7 @@ export function Header() {
                 />
               ))}
               <a
-                href="/system-focus/resume.pdf"
+                href="/resume.pdf"
                 download="Sutharsan_Resume.pdf"
                 onClick={() => setIsMenuOpen(false)}
                 className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-foreground hover:bg-muted mt-2"
@@ -168,7 +168,7 @@ export function Header() {
               className={cn(
                 "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
                 "text-foreground/80 hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-                isActive && "bg-muted text-white"
+                isActive && "text-white"
               )}
             >
                 <span className="hidden md:inline">{item.name}</span>
@@ -197,7 +197,7 @@ export function Header() {
             );
           })}
           <a
-            href="/system-focus/resume.pdf"
+            href="/resume.pdf"
             download="Sutharsan_Resume.pdf"
             aria-label="Download resume"
             className={cn(
