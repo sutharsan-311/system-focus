@@ -41,15 +41,18 @@ function ModernCard({ children }: { children: React.ReactNode }) {
 
   return (
     <motion.div 
-      className="rounded-2xl border border-border/50 bg-gradient-to-br from-card to-card/50 overflow-hidden"
+      className="rounded-2xl overflow-hidden group relative"
       whileHover={!prefersReducedMotion ? {
-        y: -4,
-        borderColor: "hsl(199 100% 45% / 0.3)",
-        boxShadow: "0 20px 40px -12px rgba(199, 210, 254, 0.08)",
+        y: -6,
         transition: { duration: 0.3, ease: "easeOut" }
       } : {}}
     >
-      {children}
+      {/* Glow background */}
+      <div className="absolute -inset-0.5 bg-gradient-to-br from-primary/25 via-primary/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none" />
+      
+      <div className="relative glass-md">
+        {children}
+      </div>
     </motion.div>
   );
 }

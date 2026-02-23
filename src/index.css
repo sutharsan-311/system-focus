@@ -4,46 +4,50 @@
 
 @layer base {
   :root {
-    --background: 0 0% 6%;
-    --foreground: 210 14% 92%;
+    --background: 0 0% 4%;
+    --foreground: 210 15% 94%;
 
-    --card: 210 20% 12%;
-    --card-foreground: 210 14% 92%;
+    --card: 210 25% 13%;
+    --card-foreground: 210 15% 94%;
 
-    --popover: 210 20% 12%;
-    --popover-foreground: 210 14% 92%;
+    --popover: 210 25% 13%;
+    --popover-foreground: 210 15% 94%;
 
-    --primary: 199 100% 45%;
+    --primary: 199 100% 50%;
     --primary-foreground: 210 20% 8%;
 
-    --secondary: 210 20% 16%;
-    --secondary-foreground: 210 14% 92%;
+    --secondary: 210 22% 16%;
+    --secondary-foreground: 210 15% 94%;
 
-    --muted: 210 16% 22%;
-    --muted-foreground: 208 10% 62%;
+    --muted: 210 16% 24%;
+    --muted-foreground: 208 10% 58%;
 
-    --accent: 199 100% 45%;
+    --accent: 199 100% 50%;
     --accent-foreground: 210 20% 8%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 210 18% 18%;
-    --input: 210 18% 18%;
-    --ring: 199 100% 45%;
+    --border: 210 20% 24%;
+    --input: 210 20% 24%;
+    --ring: 199 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
     /* Custom tokens */
-    --surface-elevated: 210 20% 15%;
-    --text-secondary: 208 10% 62%;
-    --accent-glow: 199 100% 45%;
+    --surface-elevated: 210 25% 20%;
+    --text-secondary: 208 10% 58%;
+    --accent-glow: 199 100% 50%;
     
     /* Accent colors for content types */
-    --accent-primary: 199 100% 45%;
-    --accent-secondary: 180 95% 48%;
-    --accent-tertiary: 160 95% 50%;
+    --accent-primary: 199 100% 50%;
+    --accent-secondary: 180 95% 52%;
+    --accent-tertiary: 160 95% 54%;
     --accent-warning: 45 90% 60%;
+
+    /* Glass morphism & modern effects */
+    --glass-opacity: 0.08;
+    --blur-amount: 12px;
   }
 
   .dark {
@@ -84,7 +88,7 @@
 
   html {
     scroll-behavior: smooth;
-    @apply bg-black;
+    @apply bg-background;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -103,7 +107,11 @@
   }
 
   body {
-    @apply bg-black text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image: 
+      radial-gradient(at 20% 50%, hsl(199 100% 50% / 0.05) 0px, transparent 50px),
+      radial-gradient(at 80% 80%, hsl(199 100% 50% / 0.03) 0px, transparent 50px),
+      linear-gradient(135deg, transparent 0%, hsl(199 100% 50% / 0.01) 100%);
   }
 
   ::selection {
@@ -137,21 +145,77 @@
     }
   }
 
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(199 100% 50% / 0.2);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(199 100% 50% / 0.4);
+    }
+  }
+
   .animate-shimmer {
     animation: shimmer 2s infinite;
   }
 
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-shimmer,
-    .animate-pulse {
+    .animate-pulse,
+    .animate-float,
+    .animate-glow-pulse {
       animation: none;
     }
+  }
+
+  /* Glassmorphism effects */
+  .glass {
+    background: hsl(210 25% 13% / 0.5);
+    backdrop-filter: blur(var(--blur-amount));
+    border: 1px solid hsl(210 20% 24% / 0.3);
+  }
+
+  .glass-md {
+    background: hsl(210 25% 13% / 0.45);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(210 20% 24% / 0.25);
+  }
+
+  .glass-lg {
+    background: hsl(210 25% 13% / 0.4);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(210 20% 24% / 0.2);
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: 0 0 30px hsl(199 100% 50% / 0.15), inset 0 1px 0 hsl(210 15% 94% / 0.1);
+  }
+
+  .glow-primary-sm {
+    box-shadow: 0 0 15px hsl(199 100% 50% / 0.1);
   }
 
   /* Subtle neutral focus effect for inputs */
   .glow-focus:focus-visible {
     border-color: hsl(var(--border));
-    box-shadow: none;
+    box-shadow: 0 0 0 3px hsl(199 100% 50% / 0.2);
     outline: none;
   }
 }

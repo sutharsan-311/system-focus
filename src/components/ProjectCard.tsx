@@ -51,22 +51,24 @@ export function ProjectCard({ project, value, featured = false }: ProjectCardPro
 
   return (
     <motion.div 
-      className="relative rounded-2xl border border-border/50 overflow-hidden"
+      className="relative rounded-2xl overflow-hidden group"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: "easeOut" }}
       whileHover={!prefersReducedMotion && !isTouchDevice ? {
-        y: -6,
-        boxShadow: "0 20px 50px -12px rgba(199, 210, 254, 0.1)",
+        y: -8,
         transition: { duration: 0.3, ease: "easeOut" }
       } : {}}
     >
+      {/* Glow background */}
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/25 via-transparent to-primary/15 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none" />
+      
       {/* Inner Content Card */}
       <motion.div 
-        className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-card to-card/50 border border-border/40 shadow-sm"
+        className="relative flex h-full flex-col overflow-hidden rounded-2xl glass-md"
         whileHover={!prefersReducedMotion && !isTouchDevice ? {
-          borderColor: "hsl(199 100% 45% / 0.3)",
+          borderColor: "hsl(199 100% 50% / 0.5)",
           transition: { duration: 0.3 }
         } : {}}
       >

@@ -153,7 +153,8 @@ export function Header() {
 
       {/* Desktop Navigation */}
       <div className="fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-8 pointer-events-none hidden md:block">
-        <div className="flex items-center gap-2 bg-background/60 border border-border/50 backdrop-blur-xl py-2 px-2 rounded-2xl shadow-xl pointer-events-auto" role="navigation" aria-label="Main navigation">
+        <div className="glass-lg flex items-center gap-2 py-3 px-2 rounded-2xl shadow-2xl pointer-events-auto group" role="navigation" aria-label="Main navigation">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/3 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.name;
@@ -168,7 +169,7 @@ export function Header() {
               className={cn(
                 "relative cursor-pointer text-sm font-medium px-5 py-2.5 rounded-xl transition-all duration-300",
                 "text-muted-foreground hover:text-foreground focus:outline-none",
-                isActive && "bg-primary/15 text-primary"
+                isActive && "bg-primary/20 text-primary glass-md"
               )}
             >
                 <span className="hidden md:inline">{item.name}</span>

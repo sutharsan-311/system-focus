@@ -125,7 +125,7 @@ export function Hero() {
                   {capabilities.map((cap, index) => (
                     <motion.span
                       key={cap}
-                      className="font-mono text-xs md:text-sm text-muted-foreground px-4 py-2 bg-secondary/40 rounded-lg border border-border/60 cursor-default transition-all duration-200 hover:bg-secondary/60 hover:text-foreground hover:border-primary/50"
+                      className="font-mono text-xs md:text-sm text-muted-foreground px-4 py-2 glass rounded-lg cursor-default transition-all duration-200 hover:bg-primary/15 hover:text-foreground hover:border-primary/60 group"
                       initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
                       animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
                       transition={prefersReducedMotion ? { duration: 0 } : {
@@ -133,10 +133,11 @@ export function Hero() {
                         delay: index * 0.08
                       }}
                       whileHover={!prefersReducedMotion ? {
-                        scale: 1.05,
-                        y: -2,
+                        scale: 1.08,
+                        y: -3,
                       } : {}}
                     >
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm -z-10" />
                       {cap}
                     </motion.span>
                   ))}
