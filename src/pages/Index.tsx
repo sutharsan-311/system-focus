@@ -33,7 +33,7 @@ const Index = () => {
           Skip to footer
         </a>
       </div>
-      <main id="main-content" className="min-h-screen w-full bg-black">
+      <main id="main-content" className="min-h-screen w-full bg-background">
         <ScrollProgress />
         <Header />
       <Hero />
