@@ -132,7 +132,7 @@ export function Skills() {
                   {category.skills.map((skill, skillIndex) => (
                     <motion.span
                       key={skill}
-                      className="text-xs text-muted-foreground font-mono px-2.5 py-1 bg-secondary rounded border border-border hover:border-primary/50 hover:bg-primary/5 hover:text-foreground cursor-default focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200"
+                      className="text-xs text-muted-foreground font-mono px-3 py-1.5 bg-secondary/40 rounded-lg border border-border/60 hover:border-primary/50 hover:bg-primary/10 hover:text-foreground cursor-default focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200"
                       tabIndex={0}
                       role="text"
                       aria-label={`Skill: ${skill}`}
@@ -140,16 +140,16 @@ export function Skills() {
                       whileInView={prefersReducedMotion ? {} : { opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={prefersReducedMotion ? { duration: 0 } : {
-                        duration: 0.2,
-                        delay: index * 0.1 + skillIndex * 0.03
+                        duration: 0.3,
+                        delay: index * 0.08 + skillIndex * 0.02
                       }}
                       whileHover={!prefersReducedMotion ? {
-                        scale: 1.1,
+                        scale: 1.08,
                         y: -2,
                         transition: { duration: 0.2, ease: "easeOut" }
                       } : {}}
                       whileFocus={!prefersReducedMotion ? {
-                        scale: 1.1,
+                        scale: 1.08,
                         y: -2,
                         transition: { duration: 0.2, ease: "easeOut" }
                       } : {}}

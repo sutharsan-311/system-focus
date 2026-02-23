@@ -17,11 +17,11 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const queryClient = new QueryClient();
 
 const PageLoader = () => (
-  <div className="min-h-screen w-full bg-black flex items-center justify-center">
+  <div className="min-h-screen w-full bg-background flex items-center justify-center">
     <div className="space-y-4 w-full max-w-md px-4">
-      <Skeleton className="h-12 w-3/4" />
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-5/6" />
+      <Skeleton className="h-12 w-3/4 bg-secondary/40" />
+      <Skeleton className="h-4 w-full bg-secondary/30" />
+      <Skeleton className="h-4 w-5/6 bg-secondary/30" />
     </div>
   </div>
 );

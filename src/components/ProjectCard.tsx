@@ -51,31 +51,22 @@ export function ProjectCard({ project, value, featured = false }: ProjectCardPro
 
   return (
     <motion.div 
-      className="relative rounded-[1.25rem] md:rounded-[1.5rem] border-[0.75px] border-border p-2 md:p-3"
+      className="relative rounded-2xl border border-border/50 overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.4, ease: "easeOut" }}
+      transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: "easeOut" }}
       whileHover={!prefersReducedMotion && !isTouchDevice ? {
-        y: -4,
+        y: -6,
+        boxShadow: "0 20px 50px -12px rgba(199, 210, 254, 0.1)",
         transition: { duration: 0.3, ease: "easeOut" }
       } : {}}
     >
-      {/* Glowing Effect - Outer Boundary */}
-      <GlowingEffect
-        spread={40}
-        glow={true}
-        disabled={isTouchDevice}
-        proximity={64}
-        inactiveZone={0.01}
-        borderWidth={3}
-      />
-
-      {/* Inner Content Card - Double Boundary */}
+      {/* Inner Content Card */}
       <motion.div 
-        className="relative flex h-full flex-col overflow-hidden rounded-xl border-[0.75px] bg-background shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)]"
+        className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-card to-card/50 border border-border/40 shadow-sm"
         whileHover={!prefersReducedMotion && !isTouchDevice ? {
-          boxShadow: "0px_0px_40px_0px_rgba(45,45,45,0.4)",
+          borderColor: "hsl(199 100% 45% / 0.3)",
           transition: { duration: 0.3 }
         } : {}}
       >
@@ -85,7 +76,7 @@ export function ProjectCard({ project, value, featured = false }: ProjectCardPro
         >
           <AccordionTrigger 
             id={`${value}-trigger`}
-            className="w-full px-6 py-6 text-left hover:bg-secondary/30 transition-colors duration-150 hover:no-underline group"
+            className="w-full px-6 md:px-8 py-6 text-left hover:bg-primary/5 transition-all duration-200 hover:no-underline group"
             aria-expanded={value === "project-0" || value === "project-1" || value === "project-2" ? undefined : false}
             aria-controls={`${value}-content`}
           >
@@ -99,7 +90,7 @@ export function ProjectCard({ project, value, featured = false }: ProjectCardPro
               >
                 {project.title}
               </motion.h3>
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed group-hover:text-foreground/80 transition-colors duration-200">
+              <p className="text-muted-foreground text-sm md:text-base leading-relaxed group-hover:text-foreground/70 transition-colors duration-200">
                 {project.summary}
               </p>
             </div>
@@ -107,11 +98,11 @@ export function ProjectCard({ project, value, featured = false }: ProjectCardPro
 
           <AccordionContent 
             id={`${value}-content`}
-            className="px-6 pb-6 pt-2 border-t border-border/50"
+            className="px-6 md:px-8 pb-8 pt-4 border-t border-border/30"
             role="region"
             aria-labelledby={`${value}-trigger`}
           >
-            <div className="space-y-6 pt-4">
+            <div className="space-y-6 pt-2">
               <div>
                 <h4 className="text-sm font-mono text-muted-foreground uppercase tracking-wider mb-3">
                   Implementation

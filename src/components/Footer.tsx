@@ -43,7 +43,7 @@ export function Footer() {
   };
 
   return (
-    <footer id="footer" className="py-12 border-t border-border bg-black" role="contentinfo">
+    <footer id="footer" className="py-16 border-t border-border bg-gradient-to-b from-background to-background/80" role="contentinfo">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
@@ -83,8 +83,8 @@ export function Footer() {
                     href={social.url}
                     target={social.url.startsWith("mailto:") ? undefined : "_blank"}
                     rel={social.url.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                    className="p-2 rounded-lg bg-secondary hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
-                    whileHover={{ scale: 1.1 }}
+                    className="p-2.5 rounded-lg bg-secondary/40 border border-border/60 hover:bg-primary/15 hover:border-primary/50 text-muted-foreground hover:text-primary transition-all duration-200"
+                    whileHover={{ scale: 1.12, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     aria-label={social.name}
                   >

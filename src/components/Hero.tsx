@@ -83,9 +83,9 @@ export function Hero() {
   };
 
   return (
-    <section ref={heroRef} className="h-screen w-full flex flex-col justify-center" role="banner" aria-label="Hero section">
+    <section ref={heroRef} className="h-screen w-full flex flex-col justify-center relative" role="banner" aria-label="Hero section">
       <div className="w-full h-full">
-        <div className="w-full h-full bg-black relative overflow-hidden">
+        <div className="w-full h-full bg-gradient-to-b from-background via-background to-background/95 relative overflow-hidden">
           <Spotlight
             className="-top-40 left-0 md:left-60 md:-top-20"
             aria-hidden={true}
@@ -93,52 +93,48 @@ export function Hero() {
           
           <div className="flex h-full">
             {/* Left content */}
-            <div className="flex-1 p-8 md:p-12 relative z-10 flex flex-col justify-center">
+            <div className="flex-1 px-6 md:px-12 lg:px-16 relative z-10 flex flex-col justify-center">
               <motion.div
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.15 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
               >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-white mb-3">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground mb-4 text-balance">
                   Sutharsan
                 </h1>
-                <div className="h-12 md:h-14 lg:h-16 mb-6 flex items-center">
+                <div className="h-14 md:h-16 lg:h-20 mb-8 flex items-center">
                   <AnimatePresence mode="wait">
                     <motion.h2
                       key={currentTitleIndex}
                       initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
                       animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
                       exit={prefersReducedMotion ? {} : { opacity: 0, y: -20 }}
-                      transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
-                      className="text-2xl md:text-3xl lg:text-4xl font-medium text-neutral-300"
+                      transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: "easeInOut" }}
+                      className="text-2xl md:text-3xl lg:text-4xl font-semibold text-muted-foreground"
                     >
                       {rotatingTitles[currentTitleIndex]}
                     </motion.h2>
                   </AnimatePresence>
                 </div>
                 
-                <p className="mt-4 text-lg md:text-xl text-neutral-300 max-w-2xl mb-8">
-                  I build and deploy real world autonomous robots using <strong>ROS2, nav2, and ros2_control</strong> working hands on with perception, mapping, navigation, and robot hardware.
+                <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-2xl mb-10 leading-relaxed">
+                  I build and deploy real world autonomous robots using <span className="text-foreground font-semibold">ROS2, nav2, and ros2_control</span> working hands on with perception, mapping, navigation, and robot hardware.
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-12">
+                <div className="flex flex-wrap gap-3 mb-14">
                   {capabilities.map((cap, index) => (
                     <motion.span
                       key={cap}
-                      className="font-mono text-sm text-neutral-400 px-3 py-1.5 bg-neutral-900/50 rounded border border-neutral-800 cursor-default transition-colors duration-200"
+                      className="font-mono text-xs md:text-sm text-muted-foreground px-4 py-2 bg-secondary/40 rounded-lg border border-border/60 cursor-default transition-all duration-200 hover:bg-secondary/60 hover:text-foreground hover:border-primary/50"
                       initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
                       animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
                       transition={prefersReducedMotion ? { duration: 0 } : {
-                        duration: 0.3,
-                        delay: index * 0.1
+                        duration: 0.4,
+                        delay: index * 0.08
                       }}
                       whileHover={!prefersReducedMotion ? {
-                        scale: 1.08,
+                        scale: 1.05,
                         y: -2,
-                        borderColor: "rgba(255, 255, 255, 0.3)",
-                        backgroundColor: "rgba(255, 255, 255, 0.1)",
-                        color: "rgba(255, 255, 255, 0.9)",
-                        transition: { duration: 0.2, ease: "easeOut" }
                       } : {}}
                     >
                       {cap}
@@ -146,11 +142,11 @@ export function Hero() {
                   ))}
                 </div>
 
-                <div className="flex flex-col md:flex-row gap-4 w-full">
+                <div className="flex flex-col sm:flex-row gap-4 w-full max-w-2xl">
                   <GradientButton 
                     onClick={scrollToProjects}
                     aria-label="Scroll to projects section"
-                    className="w-full md:w-auto"
+                    className="flex-1 sm:flex-none"
                   >
                     View Projects
                   </GradientButton>
@@ -158,7 +154,7 @@ export function Hero() {
                     variant="variant" 
                     onClick={scrollToContact}
                     aria-label="Scroll to contact section"
-                    className="w-full md:w-auto"
+                    className="flex-1 sm:flex-none"
                   >
                     Let's Connect
                   </GradientButton>
@@ -166,7 +162,7 @@ export function Hero() {
                     variant="resume" 
                     onClick={downloadResume}
                     aria-label="Download resume"
-                    className="w-full md:w-auto"
+                    className="flex-1 sm:flex-none"
                   >
                     Download Resume
                   </GradientButton>
@@ -176,10 +172,10 @@ export function Hero() {
 
             {/* Right content - 3D Robot */}
             <motion.div 
-              className="flex-1 relative"
-              initial={{ opacity: 0, x: 20 }}
+              className="hidden lg:flex flex-1 relative"
+              initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               style={{
                 y: y,
                 opacity: opacity,

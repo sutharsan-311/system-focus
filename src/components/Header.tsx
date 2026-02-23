@@ -152,8 +152,8 @@ export function Header() {
       </div>
 
       {/* Desktop Navigation */}
-      <div className="fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6 pointer-events-none hidden md:block">
-        <div className="flex items-center gap-3 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg pointer-events-auto" role="navigation" aria-label="Main navigation">
+      <div className="fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-8 pointer-events-none hidden md:block">
+        <div className="flex items-center gap-2 bg-background/60 border border-border/50 backdrop-blur-xl py-2 px-2 rounded-2xl shadow-xl pointer-events-auto" role="navigation" aria-label="Main navigation">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.name;
@@ -166,47 +166,42 @@ export function Header() {
               aria-label={`Navigate to ${item.name} section`}
               aria-current={isActive ? "page" : undefined}
               className={cn(
-                "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
-                "text-foreground/80 hover:text-white focus:outline-none",
-                isActive && "bg-white/10 text-white"
+                "relative cursor-pointer text-sm font-medium px-5 py-2.5 rounded-xl transition-all duration-300",
+                "text-muted-foreground hover:text-foreground focus:outline-none",
+                isActive && "bg-primary/15 text-primary"
               )}
             >
                 <span className="hidden md:inline">{item.name}</span>
                 <span className="md:hidden">
-                  <Icon size={18} strokeWidth={2.5} />
+                  <Icon size={18} strokeWidth={2} />
                 </span>
                 {isActive && (
                   <motion.div
                     layoutId="lamp"
-                    className="absolute inset-0 w-full bg-white/5 rounded-full -z-10"
+                    className="absolute inset-0 w-full bg-primary/10 rounded-xl -z-10"
                     initial={false}
                     transition={{
                       type: "spring",
-                      stiffness: 300,
+                      stiffness: 380,
                       damping: 30,
                     }}
-                  >
-                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-white rounded-t-full">
-                      <div className="absolute w-12 h-6 bg-white/20 rounded-full blur-md -top-2 -left-2" />
-                      <div className="absolute w-8 h-6 bg-white/20 rounded-full blur-md -top-1" />
-                      <div className="absolute w-4 h-4 bg-white/20 rounded-full blur-sm top-0 left-2" />
-                    </div>
-                  </motion.div>
+                  />
                 )}
               </a>
             );
           })}
+          <div className="w-px h-6 bg-border/40 mx-1" />
           <a
             href="/resume.pdf"
             download="Sutharsan_Resume.pdf"
             aria-label="Download resume"
             className={cn(
-              "relative cursor-pointer text-sm font-semibold px-4 py-2 rounded-full transition-colors",
-              "text-foreground/80 hover:text-white focus:outline-none flex items-center gap-2"
+              "relative cursor-pointer text-sm font-medium px-5 py-2.5 rounded-xl transition-all duration-300",
+              "text-muted-foreground hover:text-foreground focus:outline-none flex items-center gap-2"
             )}
           >
             <span className="hidden md:inline">Resume</span>
-            <Download size={18} strokeWidth={2.5} className="md:hidden" />
+            <Download size={18} strokeWidth={2} className="md:hidden" />
           </a>
         </div>
       </div>

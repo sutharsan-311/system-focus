@@ -77,10 +77,11 @@ export function Experience() {
                 key={index}
                 variants={staggerItem}
                 viewport={{ once: true }}
-                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.4 }}
-                className="relative pl-8 border-l-2 border-border rounded-lg p-4 -ml-4 hover:bg-primary/5 transition-colors duration-200"
+                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
+                className="relative pl-8 border-l-2 border-primary/30 rounded-lg p-6 -ml-4 hover:bg-primary/8 transition-all duration-300 bg-gradient-to-r from-primary/5 to-transparent"
                 whileHover={!prefersReducedMotion ? {
-                  x: 4,
+                  x: 6,
+                  borderColor: "hsl(199 100% 45% / 0.6)",
                   transition: { duration: 0.3, ease: "easeOut" }
                 } : {}}
               >
@@ -88,11 +89,11 @@ export function Experience() {
                   initial={prefersReducedMotion ? {} : { scale: 0 }}
                   whileInView={prefersReducedMotion ? {} : { scale: 1 }}
                   viewport={{ once: true }}
-                  transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3, delay: index * 0.1 + 0.1 }}
-                  className="absolute -left-[9px] top-4 w-4 h-4 rounded-full bg-primary border-2 border-background z-10 shadow-lg shadow-primary/20"
+                  transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.4, delay: index * 0.12 }}
+                  className="absolute -left-[9px] top-6 w-5 h-5 rounded-full bg-primary border-3 border-background z-10 shadow-lg shadow-primary/40"
                   whileHover={!prefersReducedMotion ? {
-                    scale: 1.4,
-                    boxShadow: "0 0 20px rgba(var(--primary), 0.4)",
+                    scale: 1.3,
+                    boxShadow: "0 0 24px hsl(199 100% 45% / 0.5)",
                     transition: { type: "spring", stiffness: 400, damping: 10 }
                   } : {}}
                 />

@@ -35,31 +35,22 @@ const links = [
   },
 ];
 
-// Glowing Card Wrapper Component
-function GlowingCard({ children }: { children: React.ReactNode }) {
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-
-  useEffect(() => {
-    setIsTouchDevice(
-      'ontouchstart' in window || 
-      navigator.maxTouchPoints > 0
-    );
-  }, []);
+// Modern Card Wrapper Component
+function ModernCard({ children }: { children: React.ReactNode }) {
+  const prefersReducedMotion = motion.useReducedMotion ? motion.useReducedMotion() : false;
 
   return (
-    <div className="relative rounded-[1.25rem] md:rounded-[1.5rem] border-[0.75px] border-border p-2 md:p-3">
-      <GlowingEffect
-        spread={40}
-        glow={true}
-        disabled={isTouchDevice}
-        proximity={64}
-        inactiveZone={0.01}
-        borderWidth={3}
-      />
-      <div className="relative rounded-xl border-[0.75px] border-border/50">
-        {children}
-      </div>
-    </div>
+    <motion.div 
+      className="rounded-2xl border border-border/50 bg-gradient-to-br from-card to-card/50 overflow-hidden"
+      whileHover={!prefersReducedMotion ? {
+        y: -4,
+        borderColor: "hsl(199 100% 45% / 0.3)",
+        boxShadow: "0 20px 40px -12px rgba(199, 210, 254, 0.08)",
+        transition: { duration: 0.3, ease: "easeOut" }
+      } : {}}
+    >
+      {children}
+    </motion.div>
   );
 }
 
@@ -133,8 +124,8 @@ export function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Contact Info */}
             <div className="space-y-6">
-              <GlowingCard>
-                <Card className="h-full border-0 bg-background shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] flex flex-col">
+              <ModernCard>
+                <Card className="h-full border-0 bg-gradient-to-br from-card to-card/50 shadow-sm flex flex-col">
                   <CardHeader className="flex-shrink-0">
                     <CardTitle className="leading-tight min-h-[2.5rem]">Let's Chat</CardTitle>
                     <CardDescription>
@@ -163,12 +154,12 @@ export function Contact() {
                     })}
                   </CardContent>
                 </Card>
-              </GlowingCard>
+              </ModernCard>
             </div>
 
             {/* Contact Form */}
-            <GlowingCard>
-              <Card className="h-full border-0 bg-background shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] flex flex-col">
+            <ModernCard>
+              <Card className="h-full border-0 bg-gradient-to-br from-card to-card/50 shadow-sm flex flex-col">
                 <CardHeader className="flex-shrink-0">
                   <CardTitle className="leading-tight min-h-[2.5rem]">Send a Message</CardTitle>
                   <CardDescription>
@@ -190,7 +181,7 @@ export function Contact() {
                         name="name"
                         placeholder="John Doe"
                         required
-                        className="bg-background glow-focus focus-visible:ring-offset-0 focus-visible:ring-transparent"
+                        className="bg-secondary/40 border-border/60 hover:border-border focus:border-primary/50 focus-visible:ring-offset-0 focus-visible:ring-1 focus-visible:ring-primary/50 transition-colors"
                         aria-required="true"
                         aria-describedby="name-description"
                       />
@@ -206,7 +197,7 @@ export function Contact() {
                         type="email"
                         placeholder="john@example.com"
                         required
-                        className="bg-background glow-focus focus-visible:ring-offset-0 focus-visible:ring-transparent"
+                        className="bg-secondary/40 border-border/60 hover:border-border focus:border-primary/50 focus-visible:ring-offset-0 focus-visible:ring-1 focus-visible:ring-primary/50 transition-colors"
                         aria-required="true"
                         aria-describedby="email-description"
                       />
@@ -222,7 +213,7 @@ export function Contact() {
                         placeholder="What would you like to discuss? Feel free to share your thoughts..."
                         required
                         rows={5}
-                        className="bg-background resize-none glow-focus focus-visible:ring-offset-0 focus-visible:ring-transparent"
+                        className="bg-secondary/40 border-border/60 hover:border-border focus:border-primary/50 focus-visible:ring-offset-0 focus-visible:ring-1 focus-visible:ring-primary/50 resize-none transition-colors"
                         aria-required="true"
                         aria-describedby="message-description"
                       />
@@ -254,7 +245,7 @@ export function Contact() {
                   </form>
                 </CardContent>
               </Card>
-            </GlowingCard>
+            </ModernCard>
           </div>
         </motion.div>
       </div>

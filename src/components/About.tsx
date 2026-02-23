@@ -27,50 +27,21 @@ const features = [
   },
 ];
 
-// Glowing Card Wrapper Component
-function GlowingCard({ children, enable3D = false }: { children: React.ReactNode; enable3D?: boolean }) {
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+// Modern Card Wrapper Component
+function FeatureCard({ children }: { children: React.ReactNode }) {
   const prefersReducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    setIsTouchDevice(
-      'ontouchstart' in window || 
-      navigator.maxTouchPoints > 0
-    );
-  }, []);
-
-  const animationConfig = prefersReducedMotion 
-    ? { duration: 0 }
-    : { type: "spring" as const, stiffness: 300, damping: 20 };
 
   return (
     <motion.div 
-      className="relative rounded-[1.25rem] md:rounded-[1.5rem] border-[0.75px] border-border p-2 md:p-3"
-      whileHover={enable3D && !isTouchDevice && !prefersReducedMotion ? {
-        rotateY: 2,
-        rotateX: -2,
-        scale: 1.02,
-        transition: animationConfig
+      className="rounded-2xl border border-border/50 bg-gradient-to-br from-card to-card/50 overflow-hidden"
+      whileHover={!prefersReducedMotion ? {
+        y: -4,
+        borderColor: "hsl(199 100% 45% / 0.3)",
+        boxShadow: "0 20px 40px -12px rgba(199, 210, 254, 0.08)",
+        transition: { duration: 0.3, ease: "easeOut" }
       } : {}}
-      style={{ perspective: enable3D ? 1000 : undefined }}
     >
-      <GlowingEffect
-        spread={40}
-        glow={true}
-        disabled={isTouchDevice}
-        proximity={64}
-        inactiveZone={0.01}
-        borderWidth={3}
-      />
-      <motion.div 
-        className="relative rounded-xl border-[0.75px] border-border/50"
-        whileHover={enable3D && !isTouchDevice && !prefersReducedMotion ? {
-          boxShadow: "0px_0px_40px_0px_rgba(45,45,45,0.4)",
-          transition: animationConfig
-        } : {}}
-      >
-        {children}
-      </motion.div>
+      {children}
     </motion.div>
   );
 }
@@ -165,8 +136,8 @@ export function About() {
 
             {/* Education Card */}
             <div>
-              <GlowingCard>
-                <Card className="h-full border-0 bg-background shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] flex flex-col">
+              <FeatureCard>
+                <Card className="h-full border-0 bg-gradient-to-br from-card to-card/50 shadow-sm flex flex-col">
                   <CardHeader className="flex-shrink-0">
                     <CardTitle className="text-lg leading-tight min-h-[2.5rem]">Education</CardTitle>
                   </CardHeader>
@@ -182,7 +153,7 @@ export function About() {
                     </p>
                   </CardContent>
                 </Card>
-              </GlowingCard>
+              </FeatureCard>
             </div>
           </div>
 
@@ -191,8 +162,8 @@ export function About() {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <GlowingCard key={index} enable3D={true}>
-                  <Card className="h-full border-0 bg-background shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] flex flex-col">
+                <FeatureCard key={index}>
+                  <Card className="h-full border-0 bg-gradient-to-br from-card to-card/50 shadow-sm flex flex-col">
                     <CardHeader className="flex-shrink-0">
                       <motion.div 
                         className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
@@ -212,7 +183,7 @@ export function About() {
                       </CardDescription>
                     </CardContent>
                   </Card>
-                </GlowingCard>
+                </FeatureCard>
               );
             })}
           </div>

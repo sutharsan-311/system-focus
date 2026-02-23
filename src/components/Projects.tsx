@@ -88,19 +88,19 @@ const projects = [
  */
 export function Projects() {
   return (
-    <section id="projects" className="py-28 border-t border-border section-projects" role="region" aria-labelledby="projects-heading">
+    <section id="projects" className="py-32 border-t border-border section-projects" role="region" aria-labelledby="projects-heading">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.15 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h2 id="projects-heading" className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
+          <h2 id="projects-heading" className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
             Featured Work
           </h2>
-          <p className="text-muted-foreground mb-12 max-w-2xl">
-            A selection of robotics projects showcasing autonomous systems, perception, and intelligent solutions, along with additional software projects demonstrating cross-domain collaboration capabilities
+          <p className="text-muted-foreground mb-14 max-w-2xl text-base leading-relaxed">
+            A selection of robotics projects showcasing autonomous systems, perception, and intelligent solutions, along with additional software projects demonstrating cross-domain collaboration capabilities.
           </p>
           
           <motion.div
