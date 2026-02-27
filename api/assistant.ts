@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import OpenAI from "openai";
-import { knowledgeBase } from "../src/ai/knowledge";
+import { knowledgeBase } from "./knowledge";
 
 // Cache embeddings across invocations (Vercel keeps the module warm between requests).
 let cachedEmbeddings:
@@ -10,6 +10,12 @@ let cachedEmbeddings:
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
 
 function cosineSimilarity(a: number[], b: number[]): number {
   let dot = 0;
@@ -45,15 +51,34 @@ async function ensureEmbeddings() {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Handle CORS preflight
+  if (req.method === "OPTIONS") {
+    res.status(200).setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.end();
+    return;
+  }
+
   if (req.method !== "POST") {
-    res.status(405).json({ error: "Method not allowed" });
+    res.writeHead(405, {
+      "Content-Type": "application/json",
+      ...CORS_HEADERS,
+    });
+    res.end(JSON.stringify({ error: "Method not allowed" }));
     return;
   }
 
   if (!process.env.OPENAI_API_KEY) {
-    res
-      .status(500)
-      .json({ error: "OPENAI_API_KEY is not set in the environment." });
+    res.writeHead(500, {
+      "Content-Type": "application/json",
+      ...CORS_HEADERS,
+    });
+    res.end(
+      JSON.stringify({
+        error: "OPENAI_API_KEY is not set in the environment.",
+      })
+    );
     return;
   }
 
@@ -65,7 +90,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       messages?.slice().reverse().find((m) => m.role === "user")?.content;
 
     if (!latestUserMessage || typeof latestUserMessage !== "string") {
-      res.status(400).json({ error: "Missing question or messages." });
+      res.writeHead(400, {
+        "Content-Type": "application/json",
+        ...CORS_HEADERS,
+      });
+      res.end(JSON.stringify({ error: "Missing question or messages." }));
       return;
     }
 
@@ -120,12 +149,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       completion.choices[0]?.message?.content ??
       "I'm not sure how to answer that from the information I have.";
 
-    res.status(200).json({ answer });
+    res.writeHead(200, {
+      "Content-Type": "application/json",
+      ...CORS_HEADERS,
+    });
+    res.end(JSON.stringify({ answer }));
   } catch (error: any) {
     console.error("Assistant error:", error);
-    res
-      .status(500)
-      .json({ error: "Failed to generate answer from AI assistant." });
+    res.writeHead(500, {
+      "Content-Type": "application/json",
+      ...CORS_HEADERS,
+    });
+    res.end(
+      JSON.stringify({ error: "Failed to generate answer from AI assistant." })
+    );
   }
 }
 

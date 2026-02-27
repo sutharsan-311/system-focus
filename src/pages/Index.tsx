@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Stats } from "@/components/Stats";
+import { AIAssistant } from "@/components/AIAssistant";
 
 const Index = () => {
   return (
@@ -36,15 +37,17 @@ const Index = () => {
       <main id="main-content" className="min-h-screen w-full bg-black">
         <ScrollProgress />
         <Header />
-      <Hero />
-      <Stats />
-      <About />
-      <Experience />
-      <Skills />
-      <Projects />
-      <Contact />
-      <Footer />
-      <BackToTop />
+        <Hero />
+        <Stats />
+        <About />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Contact />
+        <Footer />
+        <BackToTop />
+        {/* Floating AI assistant button & panel (bottom-right) */}
+        <AIAssistant />
       </main>
     </>
   );
