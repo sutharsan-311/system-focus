@@ -1,0 +1,11 @@
+---
+description: Git commit message rules for this project
+alwaysApply: true
+---
+
+# Git Commit Trailers
+
+- Do **not** add any automatic trailers like `Made-with: Cursor` to commit messages for this repository.
+- Never pass `--trailer "Made-with: Cursor"` (or similar) when running `git commit` from within Cursor.
+- When composing commit messages, keep them clean and human-written, without tool/IDE attribution lines.
+
