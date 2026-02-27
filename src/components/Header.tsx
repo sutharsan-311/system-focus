@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Home, User, Briefcase, Code, FolderKanban, Mail, Download, Menu } from "lucide-react";
+import { Home, User, Briefcase, Code, FolderKanban, Mail, Download, Menu, Terminal } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -19,6 +19,7 @@ const navItems: NavItem[] = [
   { name: "Experience", url: "#experience", icon: Briefcase },
   { name: "Skills", url: "#skills", icon: Code },
   { name: "Projects", url: "#projects", icon: FolderKanban },
+  { name: "Ask AI", url: "#ask-ai", icon: Terminal },
   { name: "Contact", url: "#contact", icon: Mail },
 ];
 
@@ -141,7 +142,7 @@ export function Header() {
                 href="/resume.pdf"
                 download="Sutharsan_Resume.pdf"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-foreground hover:bg-white/10 mt-2"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-foreground hover:bg-white/10"
               >
                 <Download size={20} />
                 <span className="font-medium">Resume</span>
@@ -196,7 +197,7 @@ export function Header() {
               </a>
             );
           })}
-          <a
+              <a
             href="/resume.pdf"
             download="Sutharsan_Resume.pdf"
             aria-label="Download resume"

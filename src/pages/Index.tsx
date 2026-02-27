@@ -43,11 +43,10 @@ const Index = () => {
         <Experience />
         <Skills />
         <Projects />
+        <AIAssistant />
         <Contact />
         <Footer />
         <BackToTop />
-        {/* Floating AI assistant button & panel (bottom-right) */}
-        <AIAssistant />
       </main>
     </>
   );

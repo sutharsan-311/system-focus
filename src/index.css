@@ -429,4 +429,149 @@
     background: radial-gradient(ellipse at top left, rgba(76, 175, 80, 0.03) 0%, transparent 50%),
                 radial-gradient(ellipse at bottom right, rgba(76, 175, 80, 0.03) 0%, transparent 50%);
   }
+
+  .section-ask-ai {
+    background: radial-gradient(ellipse at 50% 30%, rgba(88, 166, 255, 0.05) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 80%, rgba(63, 185, 80, 0.03) 0%, transparent 45%),
+                radial-gradient(ellipse at 20% 70%, rgba(88, 166, 255, 0.02) 0%, transparent 40%);
+  }
+
+  /* Terminal body - animated grid + scanlines + noise */
+  .terminal-body {
+    background-image:
+      linear-gradient(rgba(88, 166, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(88, 166, 255, 0.02) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: 0 0;
+  }
+  .terminal-body-active {
+    position: relative;
+  }
+  .terminal-body-active::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+  }
+  .terminal-body-active::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+  }
+  @keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-body-active::before { animation: none; }
+  }
+
+  /* Terminal ambient glow pulse */
+  .terminal-glow {
+    animation: terminal-glow 4s ease-in-out infinite;
+  }
+  @keyframes terminal-glow {
+    0%, 100% { box-shadow: 0 0 60px -12px rgba(88, 166, 255, 0.08); }
+    50% { box-shadow: 0 0 80px -8px rgba(88, 166, 255, 0.12); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-glow { animation: none; }
+  }
+
+  /* Live indicator pulse */
+  .live-dot {
+    animation: live-pulse 2s ease-in-out infinite;
+  }
+  @keyframes live-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.4); }
+    50% { opacity: 0.9; box-shadow: 0 0 0 4px rgba(63, 185, 80, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .live-dot { animation: none; }
+  }
+
+  /* Processing shimmer overlay */
+  .processing-shimmer {
+    position: relative;
+  }
+  .processing-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(63, 185, 80, 0.08) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .processing-shimmer::after { animation: none; display: none; }
+  }
+
+  /* Message receive glow */
+  .message-glow {
+    animation: message-glow 1.5s ease-out;
+  }
+  @keyframes message-glow {
+    0% { box-shadow: 0 0 20px rgba(63, 185, 80, 0.15); }
+    100% { box-shadow: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .message-glow { animation: none; }
+  }
+
+  /* Terminal chat - hide scrollbar, keep scroll */
+  .terminal-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .terminal-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  @keyframes typing-dot {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-4px); opacity: 1; }
+  }
+  .typing-dot {
+    animation: typing-dot 1.4s ease-in-out infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @media (prefers-reduced-motion: reduce) {
+    .typing-dot { animation: none; opacity: 1; }
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blink { animation: none; opacity: 1; }
+  }
 }
