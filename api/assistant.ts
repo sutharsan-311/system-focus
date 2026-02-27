@@ -15,6 +15,7 @@ const knowledgeBase = [
   { id: "skills-programming", section: "skills" as const, title: "Programming Skills", content: "Programming and tooling skills: Python, C++, Bash, CMake, Git, GitHub, and debugging of real-time robotic systems." },
   { id: "education-1", section: "education" as const, title: "Education", content: "Sutharsan is pursuing a B.E. in Mechatronics Engineering at Bannari Amman Institute of Technology (2021–2025). His studies cover robotics, control systems, embedded systems, and related engineering topics." },
   { id: "achievements-1", section: "summary" as const, title: "Competitions and Achievements", content: "Notable achievements: Smart India Hackathon Winner (2021–2022), Ignite Best Project Award Winner, BRICS Robotics Competition Runner-up, E-Yantra Robotics Competition Finalist, and Flipkart GRID 2.0 Level 2 shortlist." },
+  { id: "contact-1", section: "summary" as const, title: "Contact and Location", content: "Sutharsan is based in Coimbatore, India. Email: sutharsanmail311@gmail.com. GitHub: github.com/sutharsan-311. LinkedIn: linkedin.com/in/sutharsan. He is open to collaboration and questions about robotics." },
 ];
 
 // Cache embeddings across invocations (Vercel keeps the module warm between requests).
@@ -140,9 +141,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .join("\n\n");
 
     const systemPrompt =
-      "You are an AI assistant that only answers questions about Sutharsan's background, skills, projects, and experience in robotics and ROS. " +
-      "Use the provided context sections as the source of truth. If something is not in the context, say you don't know instead of guessing. " +
-      "Keep answers concise and clear for recruiters and engineers reading a portfolio site.";
+      "You are an AI assistant for Sutharsan's portfolio. Answer questions about his background, skills, projects, experience, location, and contact using the provided context. " +
+      "For simple greetings (hi, hello, hey, etc.), respond briefly and warmly, then invite them to ask about his work. " +
+      "Use the context as the source of truth. If something is not in the context, say you don't know. Keep answers concise for recruiters and engineers.";
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
