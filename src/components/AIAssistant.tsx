@@ -10,49 +10,20 @@ interface Message {
 
 const initialMessage: Message = {
   role: "assistant",
-  content: "I answer questions using my resume, projects, and professional experience in robotics and ROS development.",
+  content:
+    "Hi! I'm an AI assistant trained on my resume, projects, and experience in robotics and ROS. Ask me anything about my work, skills, or background.",
 };
 
-// Mock responses for demo - would be replaced with actual AI backend
-const getResponse = (question: string): string => {
-  const q = question.toLowerCase();
-  
-  if (q.includes("ros") || q.includes("experience") || q.includes("work")) {
-    return "I work as a ROS Developer at Spotless AI, building perception, mapping, and navigation systems. I develop ROS nodes for sensor synchronization, point cloud processing, occupancy grid updates, and semantic mapping. I also integrate navigation stacks using planners like Move Base, SBPL, and DWB.";
-  }
-  if (q.includes("navigation") || q.includes("nav") || q.includes("planner")) {
-    return "I integrate navigation stacks using Move Base, SBPL, and DWB planners for autonomous robot movement. This includes publishing costmaps, handling real-time replanning, and debugging planner failures under dynamic conditions.";
-  }
-  if (q.includes("mapping") || q.includes("slam") || q.includes("localization")) {
-    return "I build mapping pipelines including Occupancy Grid Maps, Gmapping, Semantic Grids, and edge/corner detection. I also work on map modification and smoothing for deployed systems.";
-  }
-  if (q.includes("perception") || q.includes("vision") || q.includes("camera") || q.includes("lidar")) {
-    return "I develop perception pipelines using OpenCV, YOLO, and point cloud data. My work includes RGB + Depth synchronization, real-time point cloud processing, object detection, and image segmentation for robot systems.";
-  }
-  if (q.includes("project") || q.includes("competition")) {
-    return "Key projects include my work at Spotless AI (deployed ROS systems), Krishi Bot (E-Yantra finalist, arm manipulation + vision), Medical Drone (emergency response CV), and Flipkart GRID 2.0 (image segmentation, Level 2 shortlist).";
-  }
-  if (q.includes("language") || q.includes("programming") || q.includes("python") || q.includes("c++") || q.includes("skill")) {
-    return "Primary languages: Python and C++ for ROS development. I also work with OpenCV, YOLO, LiDAR processing, Git, MATLAB, and tools like Visual Studio Code and Ubuntu. Simulation tools include Gazebo and Blender.";
-  }
-  if (q.includes("education") || q.includes("degree") || q.includes("university") || q.includes("college")) {
-    return "B.E. Mechatronics from Bannari Amman Institute of Technology, graduating April 2025. CGPA: 7.93 (till 5th semester).";
-  }
-  if (q.includes("achievement") || q.includes("award") || q.includes("hackathon")) {
-    return "Smart India Hackathon Winner (2021-2022), Ignite Best Project Award Winner, BRICS Robotics Competition Runner-up, E-Yantra Robotics Competition Finalist, and Flipkart GRID 2.0 Level 2 shortlist.";
-  }
-  if (q.includes("contact") || q.includes("email") || q.includes("reach")) {
-    return "You can reach me via email at sutharsanmail311@gmail.com or call +91 8438536404. Links are in the Contact section below.";
-  }
-  
-  return "I can answer questions about my ROS development experience at Spotless AI, perception and mapping work, competition projects, technical skills, and education. What would you like to know?";
-};
+const ASSISTANT_API_URL =
+  import.meta.env.VITE_ASSISTANT_API_URL ||
+  "https://your-vercel-app.vercel.app/api/assistant";
 
 export function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([initialMessage]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -71,15 +42,54 @@ export function AIAssistant() {
 
     const userMessage = input.trim();
     setInput("");
-    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+    setError(null);
+
+    const nextMessages: Message[] = [
+      ...messages,
+      { role: "user", content: userMessage },
+    ];
+    setMessages(nextMessages);
     setIsLoading(true);
 
-    // Simulate response delay
-    await new Promise((resolve) => setTimeout(resolve, 300));
-    
-    const response = getResponse(userMessage);
-    setMessages((prev) => [...prev, { role: "assistant", content: response }]);
-    setIsLoading(false);
+    try {
+      const response = await fetch(ASSISTANT_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ messages: nextMessages }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to reach AI assistant");
+      }
+
+      const data = (await response.json()) as { answer?: string; error?: string };
+
+      if (data.error || !data.answer) {
+        throw new Error(data.error || "No answer returned from AI assistant");
+      }
+
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: data.answer as string },
+      ]);
+    } catch (err) {
+      console.error(err);
+      setError(
+        "Sorry, the AI assistant is temporarily unavailable. Please try again in a moment."
+      );
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            "I had an issue reaching the AI backend. Please try your question again shortly.",
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -153,6 +163,11 @@ export function AIAssistant() {
                     Assistant
                   </span>
                   <p className="text-sm">...</p>
+                </div>
+              )}
+              {error && (
+                <div className="text-xs text-red-500">
+                  {error}
                 </div>
               )}
               <div ref={messagesEndRef} />
