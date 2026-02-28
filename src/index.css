@@ -436,13 +436,12 @@
                 radial-gradient(ellipse at 20% 70%, rgba(88, 166, 255, 0.02) 0%, transparent 40%);
   }
 
-  /* Terminal body - animated grid + scanlines + noise */
+  /* Terminal body - subtle grid + scanlines + noise */
   .terminal-body {
     background-image:
-      linear-gradient(rgba(88, 166, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(88, 166, 255, 0.02) 1px, transparent 1px);
-    background-size: 32px 32px;
-    background-position: 0 0;
+      linear-gradient(rgba(88, 166, 255, 0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(88, 166, 255, 0.015) 1px, transparent 1px);
+    background-size: 28px 28px;
   }
   .terminal-body-active {
     position: relative;

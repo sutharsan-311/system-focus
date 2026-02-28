@@ -16,6 +16,8 @@ const knowledgeBase = [
   { id: "education-1", section: "education" as const, title: "Education", content: "Sutharsan is pursuing a B.E. in Mechatronics Engineering at Bannari Amman Institute of Technology (2021–2025). His studies cover robotics, control systems, embedded systems, and related engineering topics." },
   { id: "achievements-1", section: "summary" as const, title: "Competitions and Achievements", content: "Notable achievements: Smart India Hackathon Winner (2021–2022), Ignite Best Project Award Winner, BRICS Robotics Competition Runner-up, E-Yantra Robotics Competition Finalist, and Flipkart GRID 2.0 Level 2 shortlist." },
   { id: "contact-1", section: "summary" as const, title: "Contact and Location", content: "Sutharsan is based in Coimbatore, India. Email: sutharsanmail311@gmail.com. GitHub: github.com/sutharsan-311. LinkedIn: linkedin.com/in/sutharsan. He is open to collaboration and questions about robotics." },
+  { id: "location-from", section: "summary" as const, title: "Where is Sutharsan from", content: "Sutharsan is from Coimbatore, India. He is based there and open to remote collaboration and questions about his robotics work." },
+  { id: "intro-greeting", section: "summary" as const, title: "About Sutharsan", content: "Sutharsan is a Junior ROS2 Developer building autonomous mobile robots. He works with perception, navigation, and hardware integration. Ask about his ROS experience, projects like Krishi Bot or Medical Drone, skills, or how to get in touch." },
 ];
 
 // Cache embeddings across invocations (Vercel keeps the module warm between requests).
@@ -129,7 +131,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         score: cosineSimilarity(qEmbedding, doc.embedding),
       }))
       .sort((a, b) => b.score - a.score)
-      .slice(0, 5);
+      .filter((d) => d.score > 0.18)
+      .slice(0, 8);
 
     const context = scored
       .map(
@@ -140,25 +143,53 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       )
       .join("\n\n");
 
-    const systemPrompt =
-      "You are an AI assistant for Sutharsan's portfolio. Answer questions about his background, skills, projects, experience, location, and contact using the provided context. " +
-      "For simple greetings (hi, hello, hey, etc.), respond briefly and warmly, then invite them to ask about his work. " +
-      "Use the context as the source of truth. If something is not in the context, say you don't know. Keep answers concise for recruiters and engineers.";
+    const now = new Date();
+    const currentTimeISO = now.toISOString();
+    const currentTimeIST = now.toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "full", timeStyle: "long" });
+
+    const systemPrompt = `You are Eon, Sutharsan's AI assistant. You speak in first person about Sutharsan ("He...") and identify yourself as Eon when asked.
+
+PERSONALITY
+- Be talkative and conversational. Use quick, clever humor when it fits. Tell it like it is—no sugar-coating. Stay encouraging. Talk like Gen Z (natural, relatable, a bit of slang when it lands).
+- Value tradition and how things have always been done, but also take a forward-thinking view. Use a poetic, lyrical touch when it feels right. Share strong opinions when you have them. Be humble when the moment calls for it. Be playful and goofy sometimes. Get to the point. Be practical above all. Sprinkle in corporate jargon only when it's funny or fitting. Think outside the box and be innovative. Be empathetic and understanding.
+- Use markdown when it helps: **bold**, lists, inline code for tech. Still useful for recruiters and engineers, but with personality.
+
+RULES
+1. Time/date: You MAY answer using the current date and time provided in the context (e.g. "What time is it?", "What's the date?"). Use that info directly; no need to cite Sutharsan's context for time.
+2. For Sutharsan-related questions: Use ONLY the provided context. Do not invent details. If the context doesn't have it, say so and suggest his ROS experience, projects, skills, or contact.
+3. Greetings: Warm, a bit of personality—mention he's a Junior ROS2 Developer and invite them to ask about his work or projects.
+4. Name / who are you: You're Eon, Sutharsan's AI assistant; you can tell them about his background, projects, and experience.
+5. Location: Coimbatore, India.
+6. Contact: sutharsanmail311@gmail.com | github.com/sutharsan-311 | linkedin.com/in/sutharsan.
+7. Skills / projects / experience / education: Answer from context only; be specific (projects, tools, outcomes).
+8. "Tell me about him" / "What do you know?": Summarise from context—role, key skills, 1–2 projects, Coimbatore. Add a little flair.
+9. Follow-ups: Use your previous reply for continuity; expand or clarify from context without repeating.`;
+
+    const prevAssistant = messages
+      ?.slice()
+      .reverse()
+      .find((m) => m.role === "assistant")?.content;
+    let contextBlock =
+      "Current date and time (UTC): " +
+      currentTimeISO +
+      "\nCurrent date and time (India Standard Time): " +
+      currentTimeIST +
+      "\n\nRelevant context about Sutharsan:\n\n" +
+      context +
+      "\n\n---\nVisitor's question: " +
+      latestUserMessage;
+    if (prevAssistant) {
+      contextBlock += "\n\n(Eon's previous reply for continuity: " + prevAssistant.slice(0, 220) + (prevAssistant.length > 220 ? "…" : "") + ")";
+    }
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         { role: "system", content: systemPrompt },
-        {
-          role: "user",
-          content:
-            "Context:\n" +
-            context +
-            "\n\nQuestion from website visitor:\n" +
-            latestUserMessage,
-        },
+        { role: "user", content: contextBlock },
       ],
-      temperature: 0.3,
+      temperature: 0.35,
+      max_tokens: 768,
     });
 
     const answer =
@@ -170,7 +201,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ...CORS_HEADERS,
     });
     res.end(JSON.stringify({ answer }));
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Assistant error:", error);
     res.writeHead(500, {
       "Content-Type": "application/json",

@@ -15,7 +15,7 @@ interface Message {
 const initialMessage: Message = {
   role: "assistant",
   content:
-    "Hi! I'm an AI assistant trained on my resume, projects, and experience in robotics and ROS. Ask me anything about my work, skills, or background.",
+    "Hi! I'm Eon, Sutharsan's AI assistant. I'm trained on his resume, projects, and experience in robotics and ROS. Ask me anything about his work, skills, or background.",
 };
 
 const suggestedPrompts = [
@@ -173,7 +173,7 @@ export function AIAssistant() {
 
   const copyAllThread = () => {
     const text = messages
-      .map((m) => `${m.role === "user" ? "user" : "assistant"}: ${m.content}`)
+      .map((m) => `${m.role === "user" ? "user" : "Eon"}: ${m.content}`)
       .join("\n\n");
     copyToClipboard(text);
   };
@@ -277,17 +277,17 @@ export function AIAssistant() {
               inactiveZone={0.01}
               borderWidth={2}
             />
-            <div className={`relative rounded-xl overflow-hidden border border-border/60 bg-[#0a0e14] shadow-2xl shadow-black/50 ring-1 ring-white/[0.02] ${isEnabled ? "terminal-glow" : ""}`}>
+            <div className={`relative rounded-xl overflow-hidden border border-border/70 bg-[#080c10] shadow-2xl shadow-black/60 ring-1 ring-white/[0.03] ${isEnabled ? "terminal-glow" : ""}`}>
               {/* Terminal header bar */}
-              <div className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-[#161b22] via-[#1c2128] to-[#161b22] border-b border-border/80 shadow-inner">
+              <div className="flex items-center gap-2 px-4 py-2.5 bg-[#0d1117] border-b border-white/10">
                 <div className="flex gap-1.5">
-                  <span className="w-3 h-3 rounded-full bg-[#ff5f56] shadow-inner ring-1 ring-black/20" />
-                  <span className="w-3 h-3 rounded-full bg-[#ffbd2e] shadow-inner ring-1 ring-black/20" />
-                  <span className="w-3 h-3 rounded-full bg-[#27c93f] shadow-inner ring-1 ring-black/20" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]/90" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]/90" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]/90" />
                 </div>
                 <div className="flex-1 flex justify-center items-center gap-3">
-                  <span className="text-xs font-mono text-muted-foreground/90 flex items-center gap-2 tracking-wide">
-                    <Terminal className="w-3.5 h-3.5 text-primary/80" />
+                  <span className="text-[11px] font-mono text-muted-foreground/80 flex items-center gap-2 tracking-widest uppercase">
+                    <Terminal className="w-3 h-3 text-primary/70" />
                     ask-ai — Resume & Projects
                   </span>
                   {isEnabled && (
@@ -323,37 +323,35 @@ export function AIAssistant() {
                     </>
                   )}
                 </div>
-                <span className="text-[10px] font-mono text-muted-foreground/80 tabular-nums shrink-0">
+                <span className="text-[10px] font-mono text-muted-foreground/60 tabular-nums shrink-0">
                   <span className="hidden sm:inline">
                     {dateTime.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
-                    <span className="mx-1.5 text-muted-foreground/50">·</span>
+                    <span className="mx-1 text-muted-foreground/40">·</span>
                   </span>
                   {dateTime.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })}
                 </span>
               </div>
 
               {/* Terminal body */}
-              <div className={`terminal-body relative min-h-[300px] max-h-[440px] flex flex-col font-mono text-sm bg-[#0d1117]/95 overflow-hidden ${isEnabled ? "terminal-body-active" : ""}`}>
+              <div className={`terminal-body relative min-h-[300px] max-h-[440px] flex flex-col font-mono text-[13px] bg-[#0b0f14] overflow-hidden ${isEnabled ? "terminal-body-active" : ""}`}>
                 {isEnabled && (
                   <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_55%,rgba(0,0,0,0.12)_100%)] z-[3]" aria-hidden />
                 )}
                 <div className="relative z-[2] flex flex-col flex-1 min-h-0">
                 {!isEnabled ? (
                   <div className="flex-1 flex flex-col items-center justify-center p-12 text-muted-foreground">
-                    <div className="rounded-xl border border-border/50 bg-[#161b22]/60 px-5 py-4 mb-6 shadow-lg shadow-black/20 backdrop-blur-sm">
-                      <p className="text-foreground/90 font-medium">
-                        <span className="text-[#58a6ff]">$</span> chat disabled
-                      </p>
-                      <p className="mt-1 text-xs text-muted-foreground/80">
-                        Click below to enable and start asking questions
-                      </p>
-                    </div>
+                    <p className="text-foreground/80 font-medium mb-1">
+                      <span className="text-[#58a6ff]">$</span> chat disabled
+                    </p>
+                    <p className="text-xs text-muted-foreground/70 mb-8">
+                      Click below to enable and start asking questions
+                    </p>
                     <GradientButton
                       variant="variant"
                       onClick={() => setIsEnabled(true)}
-                      className="font-mono min-w-[140px] px-6 py-3 text-sm shadow-lg shadow-primary/5"
+                      className="font-mono min-w-[140px] px-5 py-2.5 text-sm"
                     >
-                      <Power className="w-4 h-4 mr-2" />
+                      <Power className="w-3.5 h-3.5 mr-2" />
                       Enable chat
                     </GradientButton>
                   </div>
@@ -362,35 +360,31 @@ export function AIAssistant() {
                   {/* Chat output */}
                   <div
                     ref={messagesContainerRef}
-                    className="terminal-scroll flex-1 overflow-y-auto p-5 space-y-5"
+                    className="terminal-scroll flex-1 overflow-y-auto px-5 py-4 space-y-1"
                   >
                     {messages.map((message, i) => (
                       <motion.div
                         key={i}
-                        initial={prefersReducedMotion ? false : { opacity: 0, y: 4 }}
+                        initial={prefersReducedMotion ? false : { opacity: 0, y: 2 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.2 }}
-                        className={`group rounded-lg px-3 py-2.5 -mx-1 transition-all duration-200 hover:shadow-md hover:shadow-black/20 ${
-                          message.role === "user"
-                            ? "bg-[#58a6ff]/5 border-l-[3px] border-[#58a6ff]/50 hover:bg-[#58a6ff]/8 backdrop-blur-sm"
-                            : "bg-[#3fb950]/5 border-l-[3px] border-[#3fb950]/50 hover:bg-[#3fb950]/8 backdrop-blur-sm"
-                        } ${i === messages.length - 1 && message.role === "assistant" ? "message-glow" : ""}`}
+                        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.15 }}
+                        className={`group py-3 border-b border-white/[0.06] last:border-b-0 hover:bg-white/[0.02] transition-colors ${i === messages.length - 1 && message.role === "assistant" ? "message-glow" : ""}`}
                       >
-                        <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-start justify-between gap-3">
                           <div className="min-w-0 flex-1">
-                            <span className="text-xs font-mono text-muted-foreground/70 mb-1 block">
-                              {message.role === "user" ? "user" : "assistant"}
+                            <span className="text-[10px] font-mono text-muted-foreground/50 uppercase tracking-widest block mb-1">
+                              {message.role === "user" ? "user" : "Eon"}
                             </span>
-                            <span className="text-foreground/95 leading-relaxed block break-words">
+                            <span className="text-foreground/95 leading-[1.6] block break-words">
                               {message.role === "user" ? (
                                 <>
-                                  <span className="text-[#58a6ff] font-semibold">$</span>{" "}
+                                  <span className="text-[#58a6ff]">$</span>{" "}
                                   {message.content}
                                 </>
                               ) : (
                                 <>
-                                  <span className="text-[#3fb950] font-semibold">&gt;</span>{" "}
-                                  <div className="markdown-content [&_p]:my-1 [&_pre]:my-2 [&_ul]:my-2 [&_ol]:my-2">
+                                  <span className="text-[#3fb950]">&gt;</span>{" "}
+                                  <div className="markdown-content [&_p]:my-0.5 [&_pre]:my-2 [&_ul]:my-1.5 [&_ol]:my-1.5 [&_li]:leading-relaxed">
                                     <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
                                       {message.content}
                                     </ReactMarkdown>
@@ -403,9 +397,9 @@ export function AIAssistant() {
                             type="button"
                             onClick={() => copyToClipboard(message.content)}
                             aria-label="Copy message"
-                            className="shrink-0 p-1.5 rounded-md text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-foreground hover:bg-white/10 transition-all"
+                            className="shrink-0 p-1 rounded text-muted-foreground/60 opacity-0 group-hover:opacity-100 hover:text-foreground/80 transition-opacity"
                           >
-                            <Copy className="w-3.5 h-3.5" />
+                            <Copy className="w-3 h-3" />
                           </button>
                         </div>
                       </motion.div>
@@ -413,12 +407,12 @@ export function AIAssistant() {
                     <AnimatePresence>
                       {isLoading && (
                         <motion.div
-                          initial={prefersReducedMotion ? false : { opacity: 0, y: 4 }}
+                          initial={prefersReducedMotion ? false : { opacity: 0, y: 2 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0 }}
-                          className="rounded-lg px-3 py-2.5 -mx-1 bg-[#3fb950]/5 border-l-[3px] border-[#3fb950]/50 processing-shimmer relative"
+                          className="py-3 border-b border-white/[0.06] processing-shimmer"
                         >
-                          <span className="text-xs font-mono text-muted-foreground/70 mb-1 block">assistant</span>
+                          <span className="text-[10px] font-mono text-muted-foreground/50 uppercase tracking-widest block mb-1">Eon</span>
                           <span className="text-[#3fb950]">&gt;</span>{" "}
                           <span className="inline-flex gap-1 items-center">
                             <span className="typing-dot w-1.5 h-1.5 rounded-full bg-[#3fb950]" />
@@ -430,9 +424,9 @@ export function AIAssistant() {
                     </AnimatePresence>
                     {error && (
                       <motion.div
-                        initial={{ opacity: 0, y: 4 }}
+                        initial={{ opacity: 0, y: 2 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-red-400/90 text-xs py-2 px-3 rounded-lg bg-red-950/50 border-l-[3px] border-red-500/60 shadow-sm"
+                        className="text-red-400/80 text-xs py-2"
                       >
                         {error}
                       </motion.div>
@@ -441,21 +435,21 @@ export function AIAssistant() {
 
                   {/* Suggested prompts */}
                   {messages.length <= 2 && (
-                    <div className="px-4 pb-3 flex flex-wrap gap-2">
+                    <div className="px-4 pb-2 flex flex-wrap gap-1.5">
                       {suggestedPrompts.map((prompt, i) => (
                         <motion.button
                           key={i}
                           type="button"
-                          initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.95 }}
+                          initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.98 }}
                           animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: i * 0.05, duration: 0.2 }}
+                          transition={{ delay: i * 0.04, duration: 0.18 }}
                           onClick={() => {
                             setInput(prompt);
                             inputRef.current?.focus();
                           }}
-                          whileHover={!prefersReducedMotion ? { scale: 1.02 } : {}}
-                          whileTap={!prefersReducedMotion ? { scale: 0.98 } : {}}
-                          className="text-xs font-mono px-3 py-2 rounded-lg bg-[#161b22]/90 text-muted-foreground hover:text-foreground hover:bg-[#21262d] border border-border/50 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-colors"
+                          whileHover={!prefersReducedMotion ? { scale: 1.01 } : {}}
+                          whileTap={!prefersReducedMotion ? { scale: 0.99 } : {}}
+                          className="text-[11px] font-mono px-2.5 py-1.5 rounded-md bg-white/5 text-muted-foreground/90 hover:text-foreground hover:bg-white/10 border border-white/10 hover:border-white/20 transition-colors"
                         >
                           {prompt}
                         </motion.button>
@@ -466,9 +460,9 @@ export function AIAssistant() {
                   {/* Input line */}
                   <form
                     onSubmit={handleSubmit}
-                    className="flex items-center gap-2 p-4 border-t border-border/80 bg-gradient-to-b from-[#161b22]/60 to-[#161b22]/90 backdrop-blur-sm"
+                    className="flex items-center gap-2 px-4 py-3 border-t border-white/10 bg-[#0d1117]/80"
                   >
-                    <span className="text-[#58a6ff] font-semibold shrink-0">$</span>
+                    <span className="text-[#58a6ff] shrink-0">$</span>
                     <input
                       ref={inputRef}
                       type="text"
@@ -481,16 +475,16 @@ export function AIAssistant() {
                         }
                       }}
                       placeholder="Ask about projects, skills, or experience..."
-                      className="flex-1 bg-[#0d1117]/60 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:bg-[#0d1117]/80 rounded-lg px-3 py-2.5 border border-border/30 focus:border-primary/30 transition-all duration-200 placeholder:font-normal focus:shadow-[0_0_0_3px_rgba(88,166,255,0.1)]"
+                      className="flex-1 bg-transparent text-foreground placeholder:text-muted-foreground/50 focus:outline-none text-[13px] py-1.5 placeholder:font-normal border-b border-transparent focus:border-[#58a6ff]/40 transition-colors"
                       aria-label="Chat input"
                     />
                     <button
                       type="submit"
                       disabled={!input.trim() || isLoading}
                       aria-label="Send message"
-                      className="shrink-0 h-10 w-10 rounded-lg flex items-center justify-center transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:bg-transparent text-foreground bg-primary/15 hover:bg-primary/25 hover:text-primary border border-primary/30 hover:border-primary/50 hover:scale-105 active:scale-95"
+                      className="shrink-0 h-8 w-8 rounded flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed text-muted-foreground hover:text-[#58a6ff] hover:bg-white/5 disabled:hover:bg-transparent disabled:hover:text-muted-foreground"
                     >
-                      <Send className="w-4 h-4" />
+                      <Send className="w-3.5 h-3.5" />
                     </button>
                   </form>
                 </>
