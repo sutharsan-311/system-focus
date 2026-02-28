@@ -18,16 +18,16 @@ export const knowledgeBase: KnowledgeChunk[] = [
   {
     id: "experience-spotless",
     section: "experience",
-    title: "Spotless AI - Junior ROS Developer",
+    title: "Logical Minds IT Services - Junior ROS2 Developer (Spotless AI collaboration)",
     content:
-      "At Spotless AI, Sutharsan develops and maintains ROS2-based autonomous mobile robots. He integrates navigation using nav2 with SBPL and DWB planners, tunes costmaps, and debugs planner failures. He builds perception pipelines in Python using OpenCV, YOLO, and PointCloud2, synchronising RGB and depth data, filtering point clouds, and generating occupancy and semantic maps. He also debugs tf2 trees, handles sensor noise, timing issues, and CPU bottlenecks, and follows modular ROS2 node design with Git and GitHub.",
+      "At Logical Minds IT Services, working on live robotics projects in collaboration with Spotless AI, Sutharsan develops and maintains ROS2-based autonomous mobile robots. He integrates navigation using nav2 with SBPL and DWB planners, tunes costmaps, and debugs planner failures. He builds perception pipelines in Python using OpenCV, YOLO, and PointCloud2, synchronising RGB and depth data, filtering point clouds, and generating occupancy and semantic maps. He also debugs tf2 trees, handles sensor noise, timing issues, and CPU bottlenecks, and follows modular ROS2 node design with Git and GitHub.",
   },
   {
     id: "experience-training",
     section: "experience",
     title: "ROS Trainee - Logical Minds IT Services",
     content:
-      "As a ROS Trainee at Logical Minds IT Services, Sutharsan trained on ROS and ROS2 fundamentals, perception, mapping, navigation, and simulation. He contributed to live robotics projects in collaboration with Spotless AI, leading to a full-time role.",
+      "As a ROS Trainee at Logical Minds IT Services, Sutharsan trained on ROS and ROS2 fundamentals, perception, mapping, navigation, and simulation. He contributed to live robotics projects in collaboration with Spotless AI, which led to a full-time transition.",
   },
   {
     id: "project-krishi-bot",

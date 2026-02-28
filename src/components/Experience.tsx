@@ -17,10 +17,11 @@ const staggerItem = {
 
 const experiences = [
   {
-    title: "Junior ROS Developer",
-    company: "Spotless AI",
+    title: "Junior ROS2 Developer",
+    company: "Logical Minds IT Services (Robotics projects in collaboration with Spotless AI)",
     period: "Mar 2025 – Present",
     bullets: [
+      "Working at **Logical Minds IT Services** on live robotics projects in collaboration with **Spotless AI**",
       "Developing and maintaining **ROS2-based autonomous mobile robots** for real-world deployment",
       "Implemented autonomous navigation using **nav2**, integrating **SBPL (global planner)** and **DWB (local planner)**",
       "Integrated robot hardware using **ros2_control**, managing controllers and actuator interfaces",
@@ -39,7 +40,7 @@ const experiences = [
     period: "Dec 2024 – Mar 2025",
     bullets: [
       "Trained in **ROS/ROS2 fundamentals**, perception, mapping, navigation, and simulation",
-      "Contributed to live robotics projects in collaboration with **Spotless AI**, leading to a full-time transition",
+      "Contributed to live robotics projects in collaboration with **Spotless AI**, which led to a full-time transition",
     ],
   },
 ];
