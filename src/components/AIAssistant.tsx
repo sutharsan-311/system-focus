@@ -120,12 +120,6 @@ export function AIAssistant() {
   }, []);
 
   useEffect(() => {
-    if (isEnabled) {
-      inputRef.current?.focus();
-    }
-  }, [isEnabled]);
-
-  useEffect(() => {
     const el = messagesContainerRef.current;
     if (el) {
       el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
@@ -348,7 +342,10 @@ export function AIAssistant() {
                     </p>
                     <GradientButton
                       variant="variant"
-                      onClick={() => setIsEnabled(true)}
+                      onClick={() => {
+                        setIsEnabled(true);
+                        requestAnimationFrame(() => inputRef.current?.focus());
+                      }}
                       className="font-mono min-w-[140px] px-5 py-2.5 text-sm"
                     >
                       <Power className="w-3.5 h-3.5 mr-2" />
