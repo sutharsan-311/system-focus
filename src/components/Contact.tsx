@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { motion } from "framer-motion";
 import { Mail, Github, Linkedin, MapPin, Send } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +10,14 @@ import { GradientButton } from "@/components/ui/gradient-button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { trackEvent } from "@/lib/analytics";
+
+const contactSchema = z.object({
+  name: z.string().refine((s) => s.trim().length >= 1, "Name is required").transform((s) => s.trim()),
+  email: z.string().min(1, "Email is required").email("Please enter a valid email address"),
+  message: z.string().refine((s) => s.trim().length >= 10, "Message must be at least 10 characters").transform((s) => s.trim()),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 const links = [
   {
@@ -65,41 +76,38 @@ function GlowingCard({ children }: { children: React.ReactNode }) {
 
 /**
  * Contact component - Contact form and social links section.
- * Features a contact form that can be integrated with EmailJS and displays social media links.
- * 
- * To enable EmailJS integration:
- * 1. Install: npm install @emailjs/browser
- * 2. Configure environment variables (VITE_EMAILJS_SERVICE_ID, etc.)
- * 3. Update handleSubmit to use sendEmail from @/lib/emailjs
+ * Uses react-hook-form + zod for validation with visible errors and accessibility.
  */
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit: rhfHandleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: { name: "", email: "", message: "" },
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const message = formData.get("message") as string;
-
     try {
       const { sendEmail } = await import('@/lib/emailjs');
-      const result = await sendEmail({ name, email, message });
+      const result = await sendEmail({ name: data.name, email: data.email, message: data.message });
       
       if (result.success) {
         setSubmitStatus({ type: 'success', message: 'Message sent successfully! I\'ll get back to you soon.' });
         trackEvent('contact_form_submit', 'Contact', 'success');
-        form.reset();
+        reset();
       } else if (result.fallback) {
-        // Mailto fallback - show info message
         setSubmitStatus({ type: 'success', message: 'Email client opened. Please send the email manually. I\'ll receive it once you send it.' });
         trackEvent('contact_form_submit', 'Contact', 'fallback_mailto');
-      form.reset();
+        reset();
       } else {
         setSubmitStatus({ type: 'error', message: result.error || 'Failed to send message. Please try again.' });
         trackEvent('contact_form_submit', 'Contact', 'error');
@@ -113,6 +121,10 @@ export function Contact() {
       setIsSubmitting(false);
     }
   };
+
+  const nameErrorId = "name-error";
+  const emailErrorId = "email-error";
+  const messageErrorId = "message-error";
 
   return (
     <section id="contact" className="py-32 border-t border-border section-contact" role="region" aria-labelledby="contact-heading">
@@ -176,8 +188,12 @@ export function Contact() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <form onSubmit={handleSubmit} className="space-y-4" aria-label="Contact form">
-                    <div aria-live="polite" aria-atomic="true" className="sr-only">
+                  <form onSubmit={rhfHandleSubmit(onSubmit)} className="space-y-4" aria-label="Contact form" noValidate>
+                    <div
+                      aria-live={submitStatus.type === 'error' ? 'assertive' : 'polite'}
+                      aria-atomic="true"
+                      className="sr-only"
+                    >
                       {submitStatus.type === 'success' && submitStatus.message}
                       {submitStatus.type === 'error' && submitStatus.message}
                     </div>
@@ -187,14 +203,20 @@ export function Contact() {
                       </label>
                       <Input
                         id="name"
-                        name="name"
+                        {...register("name")}
                         placeholder="John Doe"
-                        required
                         className="bg-background glow-focus focus-visible:ring-offset-0 focus-visible:ring-transparent"
                         aria-required="true"
-                        aria-describedby="name-description"
+                        aria-invalid={!!errors.name}
+                        aria-describedby={errors.name ? `${nameErrorId} name-description` : "name-description"}
+                        aria-errormessage={errors.name ? nameErrorId : undefined}
                       />
                       <span id="name-description" className="sr-only">Enter your full name</span>
+                      {errors.name && (
+                        <p id={nameErrorId} className="text-sm text-destructive" role="alert">
+                          {errors.name.message}
+                        </p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-medium text-foreground">
@@ -202,15 +224,21 @@ export function Contact() {
                       </label>
                       <Input
                         id="email"
-                        name="email"
                         type="email"
+                        {...register("email")}
                         placeholder="john@example.com"
-                        required
                         className="bg-background glow-focus focus-visible:ring-offset-0 focus-visible:ring-transparent"
                         aria-required="true"
-                        aria-describedby="email-description"
+                        aria-invalid={!!errors.email}
+                        aria-describedby={errors.email ? `${emailErrorId} email-description` : "email-description"}
+                        aria-errormessage={errors.email ? emailErrorId : undefined}
                       />
                       <span id="email-description" className="sr-only">Enter your email address for response</span>
+                      {errors.email && (
+                        <p id={emailErrorId} className="text-sm text-destructive" role="alert">
+                          {errors.email.message}
+                        </p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="message" className="text-sm font-medium text-foreground">
@@ -218,15 +246,21 @@ export function Contact() {
                       </label>
                       <Textarea
                         id="message"
-                        name="message"
+                        {...register("message")}
                         placeholder="What would you like to discuss? Feel free to share your thoughts..."
-                        required
                         rows={5}
                         className="bg-background resize-none glow-focus focus-visible:ring-offset-0 focus-visible:ring-transparent"
                         aria-required="true"
-                        aria-describedby="message-description"
+                        aria-invalid={!!errors.message}
+                        aria-describedby={errors.message ? `${messageErrorId} message-description` : "message-description"}
+                        aria-errormessage={errors.message ? messageErrorId : undefined}
                       />
                       <span id="message-description" className="sr-only">Enter your message or question</span>
+                      {errors.message && (
+                        <p id={messageErrorId} className="text-sm text-destructive" role="alert">
+                          {errors.message.message}
+                        </p>
+                      )}
                     </div>
                     <GradientButton 
                       type="submit" 
@@ -240,9 +274,9 @@ export function Contact() {
                     </GradientButton>
                     {submitStatus.type && (
                       <p 
-                        className={`text-xs text-center ${submitStatus.type === 'success' ? 'text-green-500' : 'text-red-500'}`}
+                        className={`text-xs text-center ${submitStatus.type === 'success' ? 'text-green-500' : 'text-destructive'}`}
                         role="status"
-                        aria-live="polite"
+                        aria-live={submitStatus.type === 'error' ? 'assertive' : 'polite'}
                         aria-atomic="true"
                       >
                         {submitStatus.message}

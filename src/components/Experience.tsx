@@ -79,7 +79,7 @@ export function Experience() {
                 variants={staggerItem}
                 viewport={{ once: true }}
                 transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.4 }}
-                className="relative pl-8 border-l-2 border-border rounded-lg p-4 -ml-4 hover:bg-primary/5 transition-colors duration-200"
+                className="relative pl-8 border-l-2 border-border rounded-lg p-4 hover:bg-primary/5 transition-colors duration-200"
                 whileHover={!prefersReducedMotion ? {
                   x: 4,
                   transition: { duration: 0.3, ease: "easeOut" }

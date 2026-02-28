@@ -38,28 +38,19 @@ export const reportWebVitals = (metric: WebVitalsMetric) => {
 /**
  * Initialize Web Vitals tracking.
  * Call this in App.tsx or main.tsx after analytics is initialized.
- * 
- * To enable Web Vitals tracking:
- * 1. Install: npm install web-vitals
- * 2. Uncomment the import and code below
  */
 export const initWebVitals = async () => {
-  if (typeof window !== 'undefined') {
-    // Web Vitals is an optional dependency
-    // Uncomment the code below after installing: npm install web-vitals
-    /*
-    try {
-      const { onCLS, onFID, onFCP, onLCP, onTTFB } = await import('web-vitals');
-      
-      onCLS(reportWebVitals);
-      onFID(reportWebVitals);
-      onFCP(reportWebVitals);
-      onLCP(reportWebVitals);
-      onTTFB(reportWebVitals);
-    } catch (error) {
-      console.warn('Web Vitals initialization failed:', error);
-    }
-    */
-    // Silently skip if web-vitals is not installed
+  if (typeof window === 'undefined') return;
+
+  try {
+    const { onCLS, onFCP, onINP, onLCP, onTTFB } = await import('web-vitals');
+
+    onCLS((m) => reportWebVitals(m as WebVitalsMetric));
+    onFCP((m) => reportWebVitals(m as WebVitalsMetric));
+    onINP((m) => reportWebVitals(m as WebVitalsMetric));
+    onLCP((m) => reportWebVitals(m as WebVitalsMetric));
+    onTTFB((m) => reportWebVitals(m as WebVitalsMetric));
+  } catch (error) {
+    console.warn('Web Vitals initialization failed:', error);
   }
 };

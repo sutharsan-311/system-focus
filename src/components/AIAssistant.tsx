@@ -46,7 +46,7 @@ const markdownComponents = {
     );
   },
   pre: ({ children }: { children?: React.ReactNode }) => (
-    <pre className="my-2 p-3 rounded-lg bg-[#0d1117] border border-border/60 overflow-x-auto text-sm">
+    <pre className="my-2 p-3 rounded-lg bg-[#0d1117] border border-border/60 overflow-x-hidden whitespace-pre-wrap break-words max-w-full text-sm">
       {children}
     </pre>
   ),

@@ -85,6 +85,7 @@
   html {
     scroll-behavior: smooth;
     @apply bg-black;
+    overflow-x: hidden;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -104,6 +105,19 @@
 
   body {
     @apply bg-black text-foreground font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Hide page scrollbars (keep scrolling enabled) */
+  html,
+  body {
+    -ms-overflow-style: none; /* IE/Edge legacy */
+    scrollbar-width: none; /* Firefox */
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 
   ::selection {
@@ -572,5 +586,22 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .animate-blink { animation: none; opacity: 1; }
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  @supports (overflow: clip) {
+    html,
+    body,
+    #root {
+      overflow-x: clip;
+    }
   }
 }
