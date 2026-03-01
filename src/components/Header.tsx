@@ -197,7 +197,7 @@ export function Header() {
               </a>
             );
           })}
-              <a
+          <a
             href="/resume.pdf"
             download="Sutharsan_Resume.pdf"
             aria-label="Download resume"

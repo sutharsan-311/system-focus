@@ -46,6 +46,26 @@
     --accent-warning: 45 90% 60%;
   }
 
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 220 10% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 10% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 10% 14%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 10% 14%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 46%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
+    --surface-elevated: 0 0% 96%;
+    --text-secondary: 220 10% 46%;
+  }
+
   .dark {
     --background: 0 0% 0%;
     --foreground: 220 13% 91%;
@@ -83,8 +103,8 @@
   }
 
   html {
-    scroll-behavior: smooth;
-    @apply bg-black;
+    scroll-behavior: smooth; /* Consistent smooth scroll for anchor links and programmatic scrollTo */
+    @apply bg-background;
     overflow-x: hidden;
   }
 
@@ -104,7 +124,7 @@
   }
 
   body {
-    @apply bg-black text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
     overflow-x: hidden;
   }
 

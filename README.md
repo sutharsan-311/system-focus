@@ -50,6 +50,10 @@ npm run dev
 - Click on "New codespace" to launch a new Codespace environment.
 - Edit files directly within the Codespace and commit and push your changes once you're done.
 
+## Optional assets (resume, social image, project screenshots)
+
+See [docs/ASSETS.md](docs/ASSETS.md) for where to add your resume PDF, social share image (`og-image.png`), and project images so the site uses them correctly.
+
 ## What technologies are used for this project?
 
 This project is built with:

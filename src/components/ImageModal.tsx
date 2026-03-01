@@ -1,7 +1,8 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ImageModalProps {
   isOpen: boolean;
@@ -24,6 +25,11 @@ interface ImageModalProps {
 export function ImageModal({ isOpen, onClose, imageUrl, alt, title }: ImageModalProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) setImageLoaded(false);
+  }, [isOpen, imageUrl]);
 
   useEffect(() => {
     if (isOpen) {
@@ -101,12 +107,18 @@ export function ImageModal({ isOpen, onClose, imageUrl, alt, title }: ImageModal
               {title}
             </h3>
           )}
-          <img
-            src={imageUrl}
-            alt={alt}
-            className="w-full h-auto rounded-lg shadow-2xl"
-            loading="lazy"
-          />
+          <div className="relative min-h-[200px]">
+            {!imageLoaded && (
+              <Skeleton className="absolute inset-0 w-full h-full min-h-[200px] rounded-lg" />
+            )}
+            <img
+              src={imageUrl}
+              alt={alt}
+              className="w-full h-auto rounded-lg shadow-2xl"
+              loading="lazy"
+              onLoad={() => setImageLoaded(true)}
+            />
+          </div>
         </motion.div>
       </DialogContent>
     </Dialog>

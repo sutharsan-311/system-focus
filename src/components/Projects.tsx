@@ -99,10 +99,10 @@ export function Projects() {
           <h2 id="projects-heading" className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
             Featured Work
           </h2>
-          <p className="text-muted-foreground mb-12 max-w-2xl">
+          <p className="text-muted-foreground mb-8 max-w-2xl">
             A selection of robotics projects showcasing autonomous systems, perception, and intelligent solutions, along with additional software projects demonstrating cross-domain collaboration capabilities
           </p>
-          
+
           <motion.div
             initial="hidden"
             whileInView="visible"

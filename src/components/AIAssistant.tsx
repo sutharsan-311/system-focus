@@ -30,6 +30,7 @@ const ASSISTANT_API_URL =
   "https://your-vercel-app.vercel.app/api/assistant";
 
 const STORAGE_KEY = "ask-ai-chat";
+const ENABLED_SESSION_KEY = "ask-ai-enabled";
 
 const markdownComponents = {
   a: ({ href, children }: { href?: string; children?: React.ReactNode }) => (
@@ -61,11 +62,14 @@ const markdownComponents = {
 function loadFromStorage(): { messages: Message[]; isEnabled: boolean } | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    const data = JSON.parse(raw) as { messages?: Message[]; isEnabled?: boolean };
-    if (!Array.isArray(data.messages) || data.messages.length === 0) return null;
-    const isEnabled = typeof data.isEnabled === "boolean" ? data.isEnabled : false;
-    return { messages: data.messages, isEnabled };
+    const messages = raw
+      ? (JSON.parse(raw) as { messages?: Message[] }).messages
+      : null;
+    if (!messages || !Array.isArray(messages) || messages.length === 0)
+      return null;
+    const isEnabled =
+      sessionStorage.getItem(ENABLED_SESSION_KEY) === "true";
+    return { messages, isEnabled };
   } catch {
     return null;
   }
@@ -73,7 +77,8 @@ function loadFromStorage(): { messages: Message[]; isEnabled: boolean } | null {
 
 function saveToStorage(messages: Message[], isEnabled: boolean) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ messages, isEnabled }));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ messages }));
+    sessionStorage.setItem(ENABLED_SESSION_KEY, String(isEnabled));
   } catch {
     // ignore
   }

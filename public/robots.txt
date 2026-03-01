@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://sutharsan-311.github.io/system-focus/sitemap.xml
+Sitemap: https://sutharsan.is-a.dev/sitemap.xml
