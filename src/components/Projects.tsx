@@ -4,6 +4,22 @@ import { ProjectCard } from "./ProjectCard";
 
 const projects = [
   {
+    title: "UV Hospital Disinfection Robot — Spotless AI",
+    summary: "Software engineer on the team deploying autonomous UV disinfection robots across hospital wards at Spotless AI. Full navigation, mapping, and perception stack; on-site deployment and production debugging.",
+    details: [
+      "Contributed to developing and deploying ROS2-based UV disinfection autonomous mobile robots across hospital environments in real-world production settings — from codebase to on-site operation.",
+      "Implemented full autonomous navigation stack using Nav2 (SBPL global planner, DWB local planner), ros2_control hardware integration, and multi-sensor perception (LiDAR, RGB-D, YOLO, PointCloud2).",
+      "Managed on-site deployment cycles, debugging real-world sensor and navigation failures under production constraints.",
+    ],
+    constraints: [
+      "Dynamic, human-occupied hospital environments",
+      "Production-level reliability and uptime requirements",
+      "TF/TF2, sensor noise, timing failures, and planner stability under real-world conditions",
+    ],
+    stack: ["ROS2", "Nav2", "ros2_control", "LiDAR", "RGB-D", "Python", "C++"],
+    outcome: "Deployed in live hospital settings; robots operate autonomously in production.",
+  },
+  {
     title: "Krishi Bot – E-Yantra Robotics Competition",
     summary: "Autonomous agricultural robot with arm manipulation and computer vision, finalist in national competition.",
     details: [
