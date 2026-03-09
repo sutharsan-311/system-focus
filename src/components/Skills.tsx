@@ -12,6 +12,7 @@ const skillCategories = [
       "MoveIt",
       "Gmapping",
       "SLAM",
+      "NVIDIA Isaac ROS",
     ],
   },
   {
@@ -53,6 +54,8 @@ const skillCategories = [
       "RViz2",
       "Git",
       "Docker",
+      "NVIDIA Jetson Orin",
+      "NVIDIA Jetson Xavier NX",
     ],
   },
   {
