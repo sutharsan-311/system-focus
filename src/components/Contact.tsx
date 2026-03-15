@@ -34,9 +34,9 @@ const links = [
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/in/sutharsan",
+    href: "https://linkedin.com/in/sutharsan311",
     icon: Linkedin,
-    value: "linkedin.com/in/sutharsan",
+    value: "linkedin.com/in/sutharsan311",
   },
   {
     label: "Location",

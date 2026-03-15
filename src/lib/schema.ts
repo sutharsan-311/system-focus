@@ -7,7 +7,7 @@ export const personSchema = {
   url: "https://sutharsan.is-a.dev/",
   sameAs: [
     "https://github.com/sutharsan-311",
-    "https://linkedin.com/in/sutharsan",
+    "https://linkedin.com/in/sutharsan311",
   ],
   email: "sutharsanmail311@gmail.com",
   address: {

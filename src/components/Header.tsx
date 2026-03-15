@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Home, User, Briefcase, Code, FolderKanban, Mail, Download, Menu, Terminal } from "lucide-react";
+import { Home, User, Briefcase, Code, Award, FolderKanban, Mail, Download, Menu, Terminal } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -18,6 +18,7 @@ const navItems: NavItem[] = [
   { name: "About", url: "#about", icon: User },
   { name: "Experience", url: "#experience", icon: Briefcase },
   { name: "Skills", url: "#skills", icon: Code },
+  { name: "Awards", url: "#achievements", icon: Award },
   { name: "Projects", url: "#projects", icon: FolderKanban },
   { name: "Ask AI", url: "#ask-ai", icon: Terminal },
   { name: "Contact", url: "#contact", icon: Mail },

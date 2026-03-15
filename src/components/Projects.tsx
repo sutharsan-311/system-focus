@@ -20,8 +20,8 @@ const projects = [
     outcome: "Deployed in live hospital settings; robots operate autonomously in production.",
   },
   {
-    title: "Krishi Bot – E-Yantra Robotics Competition",
-    summary: "Autonomous agricultural robot with arm manipulation and computer vision, finalist in national competition.",
+    title: "Krishi Bot – E-Yantra Robotics Competition (eYRC 2022-23)",
+    summary: "Autonomous agricultural robot with arm manipulation and computer vision, semifinalist in national competition.",
     details: [
       "Implemented arm manipulation control for pick-and-place agricultural tasks",
       "Developed computer vision pipelines for crop and object recognition",
@@ -34,45 +34,9 @@ const projects = [
       "Timing constraints for competition task completion",
     ],
     stack: ["ROS", "Python", "OpenCV", "Embedded Systems"],
-    outcome: "Finalist in E-Yantra Robotics Competition 2022-2023.",
+    outcome: "Semifinalist in E-Yantra Robotics Competition (eYRC 2022-23, IIT Bombay).",
     imageUrl: "/project-krishi-bot.jpg", // Add your project image to public folder
     githubUrl: "https://github.com/sutharsan-311/krishi-bot", // Update with your actual GitHub repo
-  },
-  {
-    title: "Medical Drone",
-    summary: "Emergency response drone with computer vision for person detection and localization.",
-    details: [
-      "Implemented image segmentation pipelines using OpenCV and Python",
-      "Developed object recognition system for emergency response scenarios",
-      "Integrated vision system with drone navigation controls",
-    ],
-    constraints: [
-      "Real-time processing requirements for emergency response",
-      "Variable outdoor lighting and weather conditions",
-      "Weight and power constraints on drone platform",
-    ],
-    stack: ["Python", "OpenCV", "Image Segmentation", "Drone Systems"],
-    outcome: "Functional prototype demonstrating vision-guided emergency response capabilities.",
-    imageUrl: "/project-medical-drone.jpg", // Add your project image to public folder
-    githubUrl: "https://github.com/sutharsan-311/medical-drone", // Update with your actual GitHub repo
-  },
-  {
-    title: "Flipkart GRID 2.0 – Computer Vision Challenge",
-    summary: "Image segmentation system for e-commerce product recognition and classification.",
-    details: [
-      "Developed image processing pipelines for product segmentation",
-      "Implemented object recognition algorithms using OpenCV",
-      "Applied computer vision techniques for product classification tasks",
-    ],
-    constraints: [
-      "Large variety of product categories requiring robust classification",
-      "Variable image quality and backgrounds",
-      "Accuracy requirements for production-level recognition",
-    ],
-    stack: ["Python", "OpenCV", "Image Segmentation", "Computer Vision"],
-    outcome: "Short-listed for Level 2 in Flipkart GRID 2.0 competition.",
-    imageUrl: "/project-flipkart-grid.jpg", // Add your project image to public folder
-    githubUrl: "https://github.com/sutharsan-311/flipkart-grid", // Update with your actual GitHub repo
   },
   {
     title: "LabConnect – Role-Based Collaboration Platform",

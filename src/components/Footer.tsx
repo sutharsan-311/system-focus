@@ -9,7 +9,7 @@ const socialLinks = [
   },
   {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/sutharsan",
+    url: "https://linkedin.com/in/sutharsan311",
     icon: Linkedin,
   },
   {
@@ -23,6 +23,7 @@ const quickLinks = [
   { name: "About", href: "#about" },
   { name: "Experience", href: "#experience" },
   { name: "Skills", href: "#skills" },
+  { name: "Awards", href: "#achievements" },
   { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
 ];
